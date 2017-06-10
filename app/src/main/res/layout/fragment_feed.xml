@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Continue"
+        android:layout_weight="0.2"/>
+
+   <fragment
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       class ="com.learnacad.learnacad.Fragments.ContinueFeedFragment"
+       android:id="@+id/feedFragmentContinue"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Recommended"
+        android:layout_weight="0.2"/>
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:name="com.learnacad.learnacad.Fragments.RecommendedFragment"
+        android:id="@+id/feedFragmentRecommended"/>
+
+
+</LinearLayout>

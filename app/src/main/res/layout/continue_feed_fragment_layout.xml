@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/continueFeedFragmentCard">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.22"
+            android:id="@+id/linearProgressBarContinue"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_launcher"
+                android:id="@+id/imageViewContinueFeed"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/textView"
+                android:text="Title"/>
+
+
+            <com.eralp.circleprogressview.CircleProgressView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:id="@+id/circularProgressBarContinue"
+                app:cpv_circle_color="#27375c"
+                app:cpv_circle_width="6dp"
+                app:cpv_background_circle_width="1dp"
+                app:cpv_background_circle_color="#5b253048"
+                app:cpv_text_suffix="%"
+                app:cpv_text_size="10"
+                app:cpv_text_color="#27375c"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
