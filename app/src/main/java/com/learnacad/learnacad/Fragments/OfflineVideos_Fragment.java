@@ -33,8 +33,9 @@ public class OfflineVideos_Fragment extends Fragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.offlineVideosRecyclerView);
         titles = new ArrayList<>();
         offlineVideoListAdapter = new OfflineVideoListAdapter(getActivity(),titles);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(offlineVideoListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         fetchTitles();
         return v;
     }

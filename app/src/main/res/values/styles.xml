@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -32,5 +32,23 @@
     <style name="MyCustomText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16sp</item>
     </style>
+    
+    <style name="Divider">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+<!--
+
+    <style name="ButtonStyle">
+        <item name = "width">300dp</item>
+        <item name = "height">300dp</item>
+            <shape android:shape="rectangle">
+                <corners android:radius="50dp" />
+                <solid android:color="#ff4bca81" />
+            </shape>
+
+    </style>
+-->
 
 </resources>

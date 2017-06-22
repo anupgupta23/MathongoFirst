@@ -10,8 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.learnacad.learnacad.Fragments.Bookmarks_Fragment;
 import com.learnacad.learnacad.Fragments.Home_Fragment;
+import com.learnacad.learnacad.Fragments.Library_Fragment;
+import com.learnacad.learnacad.Fragments.MyCourses_Fragment;
 import com.learnacad.learnacad.R;
 
 public class BaseActivity extends AppCompatActivity
@@ -19,6 +23,7 @@ public class BaseActivity extends AppCompatActivity
 
 
     private DrawerLayout drawer;
+    private  NavigationView navigationView;
 
 
     @Override
@@ -31,7 +36,6 @@ public class BaseActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
       //  Toolbar bottomToolbar = (Toolbar) findViewById(R.id.toolbarBottom);
 
 
@@ -43,6 +47,8 @@ public class BaseActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.content_frame,new Home_Fragment());
         fragmentTransaction.commit();
 
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -55,6 +61,8 @@ public class BaseActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,24 +86,52 @@ public class BaseActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        for(int i = 0; i < navigationView.getMenu().size(); ++i){
 
-        } else if (id == R.id.nav_slideshow) {
+                navigationView.getMenu().getItem(i).setChecked(false);
+        }
 
-        } else if (id == R.id.nav_manage) {
+        item.setChecked(true);
 
-        } else if (id == R.id.nav_share) {
+        switch (id){
 
-        } else if (id == R.id.nav_send) {
+            case R.id.libraryNavigationDrawer:{
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new Library_Fragment());
+                ft.commit();
+            }
 
+            case R.id.homeNavigationDrawer:{
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new Home_Fragment());
+                ft.commit();
+            }
+            break;
+
+            case R.id.mybookmarksNavigationDrawer:{
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new Bookmarks_Fragment());
+                ft.commit();
+            }
+            break;
+
+            case R.id.myCoursesNavigationDrawer:{
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new MyCourses_Fragment());
+                ft.commit();
+            }
+            break;
+
+            default:{
+                Toast.makeText(this, "LOL", Toast.LENGTH_SHORT).show();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

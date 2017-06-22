@@ -30,11 +30,17 @@ public class Profile_Fragment extends Fragment {
         }
         try{
 
-            view = inflater.inflate(R.layout.activity_profile,container,false);
+            view = inflater.inflate(R.layout.profile_fragment,container,false);
         }catch (InflateException e){
 
         }
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 }

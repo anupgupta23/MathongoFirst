@@ -24,6 +24,7 @@ public class EnrolledListAdapter extends RecyclerView.Adapter<EnrolledListAdapte
 
         mContext = context;
         this.titles = titles;
+
     }
 
     @Override

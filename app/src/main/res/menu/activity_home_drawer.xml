@@ -1,36 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
+  <item
+      android:title="Home"
+      android:icon="@drawable/homeicon"
+      android:id="@+id/homeNavigationDrawer"/>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    <item
+        android:title="Library"
+        android:icon="@drawable/libraryicon"
+        android:id="@+id/libraryNavigationDrawer"/>
+
+    <item
+        android:title="My Courses"
+        android:icon="@drawable/mycoursesicon"
+        android:id="@+id/myCoursesNavigationDrawer"/>
+
+
+    <item
+        android:title="My Bookmarks"
+        android:icon="@drawable/mybookmarksicon"
+        android:id="@+id/mybookmarksNavigationDrawer"/>
+
+
+    <item
+        android:title="Teachers"
+        android:icon="@drawable/teachersicon"
+        android:id="@+id/teachersNavigationDrawer"/>
+
+
+    <item
+        android:title="Events"
+        android:icon="@drawable/eventsicon"
+        android:id="@+id/eventsNavigationDrawer"/>
+
+
+    <item
+        android:title="Downloads"
+        android:icon="@drawable/downloadsicon"
+        android:id="@+id/downloadsNavigationDrawer"/>
+
+
+    <item
+        android:title="Settings"
+        android:icon="@drawable/settingsicon"
+        android:id="@+id/settingsNavigationDrawer"/>
+
+
+    <item
+        android:title="Logout"
+        android:icon="@drawable/logouticon"
+        android:id="@+id/logoutNavigationDrawer"/>
+
+
 
 </menu>

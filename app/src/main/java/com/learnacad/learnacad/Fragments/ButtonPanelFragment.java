@@ -66,11 +66,11 @@ public class ButtonPanelFragment extends Fragment {
                     home_fragment = new Home_Fragment();
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.content_frame, home_fragment);
-                    ft.commit();
+                    ft.addToBackStack(null).commit();
                 } else {
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.content_frame, home_fragment);
-                    ft.commit();
+                    ft.addToBackStack(null).commit();
                 }
             }
         });
@@ -80,6 +80,10 @@ public class ButtonPanelFragment extends Fragment {
             public void onClick(View v) {
 
                 Toast.makeText(getActivity(), "Library", Toast.LENGTH_SHORT).show();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.content_frame,new Library_Fragment());
+                fragmentTransaction.addToBackStack(null).commit();
+
             }
         });
 
@@ -98,7 +102,7 @@ public class ButtonPanelFragment extends Fragment {
                 Toast.makeText(getActivity(), "Profile", Toast.LENGTH_SHORT).show();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content_frame,new Profile_Fragment());
-                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null).commit();
 
             }
         });

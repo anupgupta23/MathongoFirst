@@ -53,8 +53,9 @@
             android:id="@+id/nav_view"
             android:fitsSystemWindows="true"
             android:layout_gravity = "start"
-            app:itemTextColor="@color/colorPrimaryDark"
-            app:headerLayout="@layout/nav_header_xml"/>
+            app:itemTextColor="@color/colorGray"
+            app:headerLayout="@layout/nav_header_xml"
+            app:menu="@menu/activity_home_drawer"/>
 
     </android.support.v4.widget.DrawerLayout>
 
