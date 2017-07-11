@@ -19,7 +19,7 @@ import com.learnacad.learnacad.R;
 
 public class LecturePlayerActivity extends AppCompatActivity implements YouTubePlayer.OnInitializedListener{
 
-    public static final String GOOGLE_DEVELOPER_KEY = "AIzaSyBrJtaqoS-xR6LdGTdlSHJm7pp8pBTGrEE";
+    public static final String GOOGLE_DEVELOPER_KEY = "";
     public static final String YOUTUBE_CODE = "K3lviiNR0pI";
     YouTubePlayer player;
     ViewPager viewPager;
