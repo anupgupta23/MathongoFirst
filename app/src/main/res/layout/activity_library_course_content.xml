@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.learnacad.learnacad.Activities.LibraryCourseContentActivity"
+    android:id="@+id/cordinatorLayout_library_course_content">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/libraryCourseContentAppBarLayout">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/libraryCourseContentToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:background="@color/backgroundBlue"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_collapseMode="pin"
+            android:gravity="start"/>
+
+
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <include layout="@layout/course_content_collapsable_toolbar_inner_layout" android:layout_width="match_parent" android:layout_height="match_parent" app:layout_collapseMode="parallax"
+                android:id="@+id/libraryCourseContentIncludedLayout"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/libraryCourseContentTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backgroundBlue"
+            app:tabIndicatorColor="@android:color/background_light"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextAppearance="@style/MyCustomText"
+            app:tabTextColor="@color/cardview_light_background" />​​
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/libraryCourseContentViewPager"/>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

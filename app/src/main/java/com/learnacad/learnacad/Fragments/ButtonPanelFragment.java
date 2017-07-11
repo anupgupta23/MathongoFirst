@@ -1,5 +1,6 @@
 package com.learnacad.learnacad.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,8 +23,10 @@ public class ButtonPanelFragment extends Fragment {
 
     private static View v;
     private static Home_Fragment home_fragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
 
         if(v != null){
 
@@ -52,14 +55,28 @@ public class ButtonPanelFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button home = (Button) view.findViewById(R.id.homeButton);
-        Button library = (Button) view.findViewById(R.id.libraryButton);
-        Button events = (Button) view.findViewById(R.id.eventsButton);
-        Button profile = (Button) view.findViewById(R.id.profileButton);
+        final Button home = (Button) view.findViewById(R.id.homeButton);
+        final Button library = (Button) view.findViewById(R.id.libraryButton);
+        final Button events = (Button) view.findViewById(R.id.eventsButton);
+        final Button profile = (Button) view.findViewById(R.id.profileButton);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                home.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.homeblue,0,0);
+                home.setTextColor(Color.parseColor("#006DF0"));
+
+                library.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.bookgray,0,0);
+                library.setTextColor(Color.parseColor("#9e9e9e"));
+
+                events.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.calendargray,0,0);
+                events.setTextColor(Color.parseColor("#9e9e9e"));
+
+                profile.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.accountgray,0,0);
+                profile.setTextColor(Color.parseColor("#9e9e9e"));
+
 
                 if (home_fragment == null) {
 
@@ -79,6 +96,22 @@ public class ButtonPanelFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+
+                library.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.bookblue,0,0);
+                library.setTextColor(Color.parseColor("#006DF0"));
+
+                home.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.homeicon,0,0);
+                home.setTextColor(Color.parseColor("#9e9e9e"));
+
+                events.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.calendargray,0,0);
+                events.setTextColor(Color.parseColor("#9e9e9e"));
+
+                profile.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.accountgray,0,0);
+                profile.setTextColor(Color.parseColor("#9e9e9e"));
+
+
+
+
                 Toast.makeText(getActivity(), "Library", Toast.LENGTH_SHORT).show();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content_frame,new Library_Fragment());
@@ -91,6 +124,22 @@ public class ButtonPanelFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+
+                events.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.calendarblue,0,0);
+                events.setTextColor(Color.parseColor("#006DF0"));
+
+                library.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.bookgray,0,0);
+                library.setTextColor(Color.parseColor("#9e9e9e"));
+
+                home.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.homeicon,0,0);
+                home.setTextColor(Color.parseColor("#9e9e9e"));
+
+                profile.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.accountgray,0,0);
+                profile.setTextColor(Color.parseColor("#9e9e9e"));
+
+
+
+
                 Toast.makeText(getActivity(), "Events", Toast.LENGTH_SHORT).show();
             }
         });
@@ -98,6 +147,22 @@ public class ButtonPanelFragment extends Fragment {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                profile.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.accountblue,0,0);
+                profile.setTextColor(Color.parseColor("#006DF0"));
+
+                library.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.bookgray,0,0);
+                library.setTextColor(Color.parseColor("#9e9e9e"));
+
+                events.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.calendargray,0,0);
+                events.setTextColor(Color.parseColor("#9e9e9e"));
+
+                home.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.homeicon,0,0);
+                home.setTextColor(Color.parseColor("#9e9e9e"));
+
+
+
 
                 Toast.makeText(getActivity(), "Profile", Toast.LENGTH_SHORT).show();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();

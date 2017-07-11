@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -46,6 +47,8 @@ public class BaseActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.content_frame,new Home_Fragment());
         fragmentTransaction.commit();
+
+//        drawer.setDrawerShadow();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -103,8 +106,11 @@ public class BaseActivity extends AppCompatActivity
         switch (id){
 
             case R.id.libraryNavigationDrawer:{
+
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                Log.d("lolo","Inside lbraryNavigationDrawer fragment replacing");
                 ft.replace(R.id.content_frame, new Library_Fragment());
+                Log.d("lolo","Inside lbraryNavigationDrawer fragment after replace");
                 ft.commit();
             }
 

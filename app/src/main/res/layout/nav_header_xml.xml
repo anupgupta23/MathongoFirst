@@ -9,31 +9,32 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            app:civ_border_width="2dp"
+            android:src="@drawable/image"
             android:layout_marginLeft="65dp"
             android:layout_marginRight="5dp"
-            app:civ_border_color="@color/colorPrimaryDark"
             android:id="@+id/imageViewNavigationDrawer"/>
 
     <TextView
+        android:id="@+id/textViewNameNavigationDrawer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="John Doe"
-        android:layout_marginTop="10dp"
-        android:id="@+id/textViewNameNavigationDrawer"
-        android:layout_marginStart="18dp"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/imageViewNavigationDrawer"
+        android:text="John Doe"
+        android:textColor="@android:color/background_dark"
         android:textSize="16sp"
         android:textStyle="normal|bold" />
 
     <TextView
+        android:id="@+id/textViewIdentityNavigationDrawer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Student"
-        android:id="@+id/textViewIdentityNavigationDrawer"
+        android:layout_alignStart="@+id/textViewNameNavigationDrawer"
         android:layout_below="@+id/textViewNameNavigationDrawer"
-        android:layout_alignStart="@+id/textViewNameNavigationDrawer" />
+        android:text="Student"
+        android:textColor="@color/colorGray" />
 </RelativeLayout>
 

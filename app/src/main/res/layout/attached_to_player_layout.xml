@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/attachedLayoutTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Domain"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/attachedLayoutViewsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/attachedLayoutTitleTextView"
+            android:layout_marginBottom="10dp"
+            android:drawableStart="@drawable/viewsicon"
+            android:text=" 21K Views"
+            android:textColor="@color/colorGray" />
+
+        <TextView
+            android:id="@+id/attachedLayoutDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/attachedLayoutViewsTextView"
+            android:layout_marginBottom="15dp"
+            android:text="@string/sampledesc"
+            android:textColor="@color/colorGray" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/attachedLayoutDescriptionTextView"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/attachedUpvotesButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/upvoteicon"
+                android:text="5K Upvotes"
+                android:textColor="@color/colorGray"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/attachedshareButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/shareicon"
+                android:text="Share"
+                android:textColor="@color/colorGray"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/attachedDownloadsButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/downloadicon"
+                android:text="Download"
+                android:textColor="@color/colorGray"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/attachedUReportButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/reporticon"
+                android:text="Report Error"
+                android:textColor="@color/colorGray"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

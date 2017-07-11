@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="15dp">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:inputType="textPersonName"
+        android:hint="Name"
+        android:id="@+id/editTextNameRegisterFragment"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:id="@+id/editTextEmailRegisterFragment"
+        android:fontFamily="sans-serif-condensed" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:inputType="textPassword"
+        android:hint="Create Password"
+        android:id="@+id/editTextCreatePasswordRegisterFragment"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:inputType="textPassword"
+        android:hint="Re-Type Password"
+        android:id="@+id/editTextReTypePasswordRegisterFragment"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.35"
+        android:text="Register"
+        android:id="@+id/buttonRegisterRegisterFragment"/>
+
+
+</LinearLayout>

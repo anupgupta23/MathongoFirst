@@ -10,13 +10,6 @@
     <string name="fb_login_protocol_scheme">fb700980526777854</string>
     <string name="fb_clientToken">7b2f8a99930acdfbd4a7e97284ca501a</string>
 
-    <string-array name="phyTopics">
-
-        <item>Kinematics</item>
-        <item>Laws Of Motion</item>
-        <item>Fluids</item>
-        <item>Waves</item>
-        <item>Electrostats</item>
-
-    </string-array>
+    <string name="sampledesc">Lorem ipsum dolor sit amet consectetur adipelit aut perferendis dolor numquam enim.</string>
+    <string name="sampleTitle">Greatest Integer Function</string>
 </resources>

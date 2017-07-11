@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.learnacad.learnacad.Activities.LecturePlayerActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+
+        <fragment
+        android:id="@+id/youtubePlayer"
+        android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cordinatorLayout_library_course_content">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/libraryCourseContentAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light">
+
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include
+                    android:id="@+id/lol"
+                    layout="@layout/attached_to_player_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_collapseMode="parallax" />
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/secondCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lol"
+                    android:layout_margin="15dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_collapseMode="parallax">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/lecturePlayerTeacherImageView"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="11dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/image" />
+
+
+                        <TextView
+                            android:id="@+id/lecturePlayerTeacherNameTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_toRightOf="@+id/lecturePlayerTeacherImageView"
+                            android:text="John Doe"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/lecturePlayerTeacherFollowersTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/lecturePlayerTeacherNameTextView"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/lecturePlayerTeacherImageView"
+                            android:text="122 Followers" />
+
+
+                        <Button
+                            android:id="@+id/lecturePlayerTeacherFollowButton"
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/button_shape"
+                            android:text="FOLLOW"
+                            android:textColor="#ffffffff" />
+
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+            </RelativeLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/lecturePlayerTabLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabSelectedTextColor="@color/backgroundBlue"
+            app:tabTextColor="@android:color/black" />​​
+
+    </android.support.design.widget.AppBarLayout>
+
+     <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/lecturePlayerViewPager"/>
+
+
+
+</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

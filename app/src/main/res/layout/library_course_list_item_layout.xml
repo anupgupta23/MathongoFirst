@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:elevation="10dp"
+    android:layout_margin="15dp"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="11dp">
+
+        <TextView
+            android:id="@+id/LibraryCourseItemTitle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/sampleTitle"
+            android:textColor="@android:color/background_dark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/LibraryCourseItemBookMarkButton"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/bookmarkgray" />
+
+
+        <RatingBar
+            android:id="@+id/LibraryCourseItemRatingbar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/LibraryCourseItemTitle"
+            android:numStars="5"
+            android:progressTint="@color/Ratingbar"
+            android:rating="3.5"
+            android:stepSize="0.5" />
+
+        <TextView
+            android:id="@+id/LibraryCourseItemFollowersTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignEnd="@+id/LibraryCourseItemTitle"
+            android:layout_below="@+id/LibraryCourseItemTitle"
+            android:drawableLeft="@drawable/accountgray"
+            android:gravity="center"
+            android:text="23K Followers"
+            android:textAllCaps="false"
+            android:textColor="@color/colorGray"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/LibraryCourseItemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/LibraryCourseItemRatingbar"
+            android:text="@string/sampledesc"
+            android:textColor="@color/colorGray" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/LibraryCourseItemCircleImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/LibraryCourseItemDescription"
+            android:layout_margin="10dp"
+            android:src="@drawable/image" />
+
+        <TextView
+            android:id="@+id/LibraryCourseItemTeacherNameTextView"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_alignTop="@+id/LibraryCourseItemCircleImageView"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@+id/LibraryCourseItemCircleImageView"
+            android:gravity="center_vertical"
+            android:text="John Doe"
+            android:textColor="@color/colorGray"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/LibraryCourseItemEnrollButton"
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/LibraryCourseItemTeacherNameTextView"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/LibraryCourseItemDescription"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/button_shape"
+            android:text="Enroll"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@android:color/white" />
+
+
+        <View
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_below="@+id/LibraryCourseItemTitle"
+            android:layout_margin="7dp"
+            android:layout_toRightOf="@+id/LibraryCourseItemRatingbar"
+            android:background="@drawable/circularseperator" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

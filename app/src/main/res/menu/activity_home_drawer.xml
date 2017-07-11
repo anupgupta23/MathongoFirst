@@ -8,7 +8,7 @@
 
     <item
         android:title="Library"
-        android:icon="@drawable/libraryicon"
+        android:icon="@drawable/bookgray"
         android:id="@+id/libraryNavigationDrawer"/>
 
     <item
@@ -25,13 +25,13 @@
 
     <item
         android:title="Teachers"
-        android:icon="@drawable/teachersicon"
+        android:icon="@drawable/accountgray"
         android:id="@+id/teachersNavigationDrawer"/>
 
 
     <item
         android:title="Events"
-        android:icon="@drawable/eventsicon"
+        android:icon="@drawable/calendargray"
         android:id="@+id/eventsNavigationDrawer"/>
 
 

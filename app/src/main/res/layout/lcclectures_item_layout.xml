@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:elevation="15dp"
+    android:padding="10dp"
+    android:layout_marginBottom="2.5dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/lcclectures_item_clapperBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/clapperboard" />
+
+        <TextView
+            android:id="@+id/lcclectures_item_titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/lcclectures_item_clapperBoard"
+            android:text="1. Introduction"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lcclectures_item_DurartionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lcclectures_item_titleTextView"
+            android:layout_toRightOf="@+id/lcclectures_item_clapperBoard"
+            android:text="3 min" />
+
+        <TextView
+            android:id="@+id/lcclectures_item_ModifyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/lcclectures_item_titleTextView"
+            android:layout_alignBottom="@+id/lcclectures_item_titleTextView"
+            android:layout_toEndOf="@+id/lcclectures_item_titleTextView"
+            android:background="?android:attr/colorPressedHighlight"
+            android:gravity="center_vertical|center"
+            android:padding="4dp"
+            android:text="UPDATED"
+            android:textColor="@color/cardview_light_background" />
+
+        <ImageButton
+            android:id="@+id/lcclectures_item_playButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="15dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/playbutton" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
