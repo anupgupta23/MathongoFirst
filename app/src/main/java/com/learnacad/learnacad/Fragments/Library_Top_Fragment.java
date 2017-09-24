@@ -46,15 +46,15 @@ public class Library_Top_Fragment extends Fragment {
         //Log.d("lolo","Inside MyCourses_Fragment RETURN");
         return view;
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (view != null) {
-            ViewGroup parentViewGroup = (ViewGroup) view.getParent();
-            if (parentViewGroup != null) {
-                parentViewGroup.removeAllViews();
-            }
-        }
-    }
+//
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        if (view != null) {
+//            ViewGroup parentViewGroup = (ViewGroup) view.getParent();
+//            if (parentViewGroup != null) {
+//                parentViewGroup.removeAllViews();
+//            }
+//        }
+//    }
 }

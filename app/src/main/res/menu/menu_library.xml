@@ -2,12 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/notificationsLibrary"
-        app:showAsAction="always"
-        android:icon="@drawable/bell" />
 
     <item android:id="@+id/notificationsFilters"
         app:showAsAction="always"
-        android:icon="@drawable/filteroutline"/>
+        android:icon="@drawable/filter"/>
 
 </menu>

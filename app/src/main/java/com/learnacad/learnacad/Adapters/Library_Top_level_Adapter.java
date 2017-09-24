@@ -45,10 +45,11 @@ public class Library_Top_level_Adapter extends RecyclerView.Adapter<Library_Top_
             @Override
             public void onClick(View v) {
 
+
                 Toast.makeText(mContext, "Clicked the Button " + position, Toast.LENGTH_SHORT).show();
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 LibraryCourseListFragment libraryCourseListFragment = new LibraryCourseListFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame_Library,libraryCourseListFragment).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,libraryCourseListFragment).addToBackStack(null).commit();
                 activity.setTitle("LOL" + position);
             }
         });

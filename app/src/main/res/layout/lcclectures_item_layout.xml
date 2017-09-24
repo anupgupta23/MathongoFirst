@@ -9,7 +9,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="7dp">
 
 
         <ImageView
@@ -19,28 +20,49 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/clapperboard" />
+            android:src="@drawable/movie" />
 
-        <TextView
-            android:id="@+id/lcclectures_item_titleTextView"
-            android:layout_width="wrap_content"
+
+        <RelativeLayout
+            android:id="@+id/llayout"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
-            android:layout_toRightOf="@+id/lcclectures_item_clapperBoard"
-            android:text="1. Introduction"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_toEndOf="@+id/lcclectures_item_clapperBoard">
+
+            <TextView
+                android:id="@+id/lcclectures_item_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1."
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lcclectures_item_titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="220dp"
+                android:layout_alignTop="@+id/lcclectures_item_number"
+                android:layout_toRightOf="@+id/lcclectures_item_number"
+                android:text="Question 1 - Rotation of Complex Numbers"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
 
         <TextView
             android:id="@+id/lcclectures_item_DurartionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lcclectures_item_titleTextView"
-            android:layout_toRightOf="@+id/lcclectures_item_clapperBoard"
+            android:layout_alignStart="@+id/lcclectures_item_titleTextView"
             android:text="3 min" />
 
-        <TextView
+
+        </RelativeLayout>
+        <!--       <TextView
             android:id="@+id/lcclectures_item_ModifyTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +73,7 @@
             android:gravity="center_vertical|center"
             android:padding="4dp"
             android:text="UPDATED"
-            android:textColor="@color/cardview_light_background" />
+            android:textColor="@color/cardview_light_background" />-->
 
         <ImageButton
             android:id="@+id/lcclectures_item_playButton"
@@ -59,6 +81,7 @@
             android:layout_height="35dp"
             android:layout_alignParentRight="true"
             android:layout_margin="15dp"
+            android:layout_marginLeft="20dp"
             android:background="@android:color/transparent"
             android:src="@drawable/playbutton" />
 

@@ -1,13 +1,18 @@
 package com.learnacad.learnacad.Adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.learnacad.learnacad.Activities.LecturePlayerActivity;
+import com.learnacad.learnacad.Models.Lecture;
 import com.learnacad.learnacad.R;
+import com.taishi.library.Indicator;
 
 import java.util.ArrayList;
 
@@ -18,12 +23,14 @@ import java.util.ArrayList;
 public class LPLectureTabAdapter extends RecyclerView.Adapter<LPLectureTabAdapter.LPLectureTabViewHolder> {
 
     Context mContext;
-    ArrayList<String> titles;
+    ArrayList<Lecture> lectures;
+    private int selectedPos = RecyclerView.NO_POSITION;
 
-    public LPLectureTabAdapter(Context context,ArrayList<String> tiles){
+    public LPLectureTabAdapter(Context context,ArrayList<Lecture> lectures,int selectedPos){
 
         mContext = context;
-        titles = tiles;
+        this.lectures = lectures;
+        this.selectedPos = selectedPos;
 
     }
 
@@ -34,29 +41,81 @@ public class LPLectureTabAdapter extends RecyclerView.Adapter<LPLectureTabAdapte
     }
 
     @Override
-    public void onBindViewHolder(LPLectureTabAdapter.LPLectureTabViewHolder holder, int position) {
+    public void onBindViewHolder(LPLectureTabAdapter.LPLectureTabViewHolder holder, final int position) {
 
         int num = position + 1;
-        holder.titleTextView.setText(titles.get(position));
+        holder.titleTextView.setText(lectures.get(position).getName());
         holder.numTextView.setText(num + "");
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectedPos = position;
+                notifyDataSetChanged();
+
+                if(mContext instanceof LecturePlayerActivity){
+
+
+                    ((LecturePlayerActivity) mContext).newDataLectureClicked(position);
+                }
+
+            }
+        });
+
+        holder.playButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                selectedPos = position;
+                notifyDataSetChanged();
+
+                if(mContext instanceof LecturePlayerActivity){
+
+
+                        ((LecturePlayerActivity) mContext).newDataLectureClicked(position);
+                }
+            }
+        });
+
+
+        if(selectedPos == position){
+
+            holder.indicator.setVisibility(View.VISIBLE);
+            holder.playButton.setVisibility(View.GONE);
+            holder.itemView.setClickable(false);
+        }else{
+
+            holder.indicator.setVisibility(View.GONE);
+            holder.playButton.setVisibility(View.VISIBLE);
+            holder.itemView.setClickable(true);
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return titles.size();
+        return lectures.size();
     }
 
     public class LPLectureTabViewHolder extends RecyclerView.ViewHolder {
 
         TextView titleTextView;
         TextView numTextView;
+        ImageButton playButton;
+        CardView completeCard;
+        Indicator indicator;
 
         public LPLectureTabViewHolder(View itemView) {
             super(itemView);
 
+            completeCard = (CardView) itemView.findViewById(R.id.lecturePlayerItemCardView);
             titleTextView = (TextView) itemView.findViewById(R.id.lecturePlayerLectureItemTitleTextView);
             numTextView = (TextView) itemView.findViewById(R.id.lecturePlayerLectureItemTextView);
+            playButton = (ImageButton) itemView.findViewById(R.id.lecturePlayerLectureItemPlayButton);
+            indicator = (Indicator) itemView.findViewById(R.id.indicator);
         }
     }
 }

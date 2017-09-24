@@ -1,21 +1,25 @@
 package com.learnacad.learnacad.Adapters;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.learnacad.learnacad.Fragments.LCCDetailsFragment;
 import com.learnacad.learnacad.Fragments.LCCLecturesFragment;
+import com.learnacad.learnacad.Fragments.LCCMaterialsFragment;
+import com.learnacad.learnacad.Fragments.LCCReviewsFragment;
 
 /**
  * Created by Sahil Malhotra on 22-06-2017.
  */
 
-public class LibraryCourseContentViewPagerAdapter extends FragmentPagerAdapter {
+public class LibraryCourseContentViewPagerAdapter extends FragmentStatePagerAdapter {
 
-
-    public LibraryCourseContentViewPagerAdapter(FragmentManager fm) {
+    Bundle bundle;
+    public LibraryCourseContentViewPagerAdapter(FragmentManager fm,Bundle bundle) {
         super(fm);
+        this.bundle = bundle;
     }
 
 
@@ -24,17 +28,32 @@ public class LibraryCourseContentViewPagerAdapter extends FragmentPagerAdapter {
 
        if(position == 0){
 
-           return new LCCDetailsFragment();
+           LCCDetailsFragment detailsFragment = new LCCDetailsFragment();
+           detailsFragment.setArguments(bundle);
+
+           return detailsFragment;
        }else if(position == 1){
 
-           return new LCCLecturesFragment();
-       }else{
+           LCCLecturesFragment lccLecturesFragment = new LCCLecturesFragment();
+           lccLecturesFragment.setArguments(bundle);
+           return lccLecturesFragment;
+       }else if(position == 2){
 
-           return new LCCDetailsFragment();
+           return new LCCMaterialsFragment();
+       }
+
+       else{
+
+           return new LCCReviewsFragment();
        }
 
     }
 
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+
+    }
 
     @Override
     public int getCount() {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <item
+ <!-- <item
       android:title="Home"
       android:icon="@drawable/homeicon"
-      android:id="@+id/homeNavigationDrawer"/>
+      android:id="@+id/homeNavigationDrawer"/>-->
 
     <item
         android:title="Library"
@@ -23,28 +23,28 @@
         android:id="@+id/mybookmarksNavigationDrawer"/>
 
 
-    <item
-        android:title="Teachers"
-        android:icon="@drawable/accountgray"
-        android:id="@+id/teachersNavigationDrawer"/>
+    <!--<item-->
+        <!--android:title="Teachers"-->
+        <!--android:icon="@drawable/accountgray"-->
+        <!--android:id="@+id/teachersNavigationDrawer"/>-->
 
 
-    <item
-        android:title="Events"
-        android:icon="@drawable/calendargray"
-        android:id="@+id/eventsNavigationDrawer"/>
+    <!--<item-->
+        <!--android:title="Events"-->
+        <!--android:icon="@drawable/calendargray"-->
+        <!--android:id="@+id/eventsNavigationDrawer"/>-->
 
 
-    <item
+  <!--  <item
         android:title="Downloads"
         android:icon="@drawable/downloadsicon"
-        android:id="@+id/downloadsNavigationDrawer"/>
+        android:id="@+id/downloadsNavigationDrawer"/>-->
 
 
-    <item
-        android:title="Settings"
-        android:icon="@drawable/settingsicon"
-        android:id="@+id/settingsNavigationDrawer"/>
+    <!--<item-->
+        <!--android:title="Settings"-->
+        <!--android:icon="@drawable/settingsicon"-->
+        <!--android:id="@+id/settingsNavigationDrawer"/>-->
 
 
     <item

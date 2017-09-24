@@ -114,7 +114,7 @@ public class ButtonPanelFragment extends Fragment {
 
                 Toast.makeText(getActivity(), "Library", Toast.LENGTH_SHORT).show();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.content_frame,new Library_Fragment());
+                fragmentTransaction.replace(R.id.content_frame,new Library_Top_Fragment());
                 fragmentTransaction.addToBackStack(null).commit();
 
             }
@@ -171,6 +171,8 @@ public class ButtonPanelFragment extends Fragment {
 
             }
         });
+
+
 
 
     }

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">1
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="15dp"
             android:layout_marginEnd="5dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             app:cardElevation="10dp">
 
             <LinearLayout
@@ -41,6 +41,22 @@
                 android:elevation="2dp"
                 android:orientation="vertical"
                 android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/lccdetails_courseDetails_classTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Class"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lccdetails_courseDetails_classValueTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/lccdetails_courseDetails_languageTextView"
@@ -56,8 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginBottom="15dp"
-                    android:layout_weight="1"
-                    android:text="Hindi" />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/lccdetails_courseDetails_durationTextView"
@@ -73,8 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginBottom="15dp"
-                    android:layout_weight="1"
-                    android:text="45min" />
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:id="@+id/lccdetails_courseDetails_difficultyTextView"
@@ -90,8 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginBottom="15dp"
-                    android:layout_weight="1"
-                    android:text="Easy" />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/lccdetails_courseDetails_relevanceTextView"
@@ -106,8 +119,7 @@
                     android:id="@+id/lccdetails_courseDetails_relevanceValueTextView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="JEE Mains,BITSAT" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -153,15 +165,14 @@
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="15dp"
                     android:layout_toEndOf="@+id/lccdetails_teacherInfo_teachersCircleImageView"
                     android:gravity="center_vertical"
                     android:text="John Doe"
                     android:textColor="@android:color/background_dark"
                     android:textStyle="bold" />
-
+<!--
                 <TextView
                     android:id="@+id/lccdetails_teacherInfo_teachersFollowersTextView"
                     android:layout_width="wrap_content"
@@ -189,28 +200,29 @@
                     android:layout_alignStart="@+id/lccdetails_teacherInfo_teachersSeperator"
                     android:layout_below="@+id/lccdetails_teacherInfo_teachersNameTextView"
                     android:layout_marginLeft="10dp"
-                    android:text="10 Following" />
+                    android:text="10 Following" />-->
 
                 <TextView
                     android:id="@+id/lccdetails_teacherInfo_teachersDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/lccdetails_teacherInfo_teachersFollowersTextView"
-                    android:layout_below="@+id/lccdetails_teacherInfo_teachersSeperator"
+                    android:text="@string/sampledesc"
+                    android:layout_below="@+id/lccdetails_teacherInfo_teachersNameTextView"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="10dp"
-                    android:text="@string/sampledesc" />
+                    android:layout_toEndOf="@+id/lccdetails_teacherInfo_teachersCircleImageView" />
 
-                <Button
-                    android:id="@+id/lccdetails_teacherInfo_enrollButton"
-                    android:layout_width="110dp"
-                    android:layout_height="40dp"
-                    android:layout_alignStart="@+id/lccdetails_teacherInfo_teachersDescription"
-                    android:layout_below="@+id/lccdetails_teacherInfo_teachersDescription"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/button_shape"
-                    android:text="Follow"
-                    android:textAllCaps="false"
-                    android:textColor="@color/cardview_light_background" />
+                <!--<Button-->
+                    <!--android:id="@+id/lccdetails_teacherInfo_enrollButton"-->
+                    <!--android:layout_width="110dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignStart="@+id/lccdetails_teacherInfo_teachersDescription"-->
+                    <!--android:layout_below="@+id/lccdetails_teacherInfo_teachersDescription"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@drawable/button_shape"-->
+                    <!--android:text="Follow"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textColor="@color/cardview_light_background" />-->
 
             </RelativeLayout>
 

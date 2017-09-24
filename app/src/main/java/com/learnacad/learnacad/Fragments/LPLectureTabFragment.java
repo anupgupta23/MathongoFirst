@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.learnacad.learnacad.Adapters.LPLectureTabAdapter;
+import com.learnacad.learnacad.Models.Lecture;
 import com.learnacad.learnacad.R;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class LPLectureTabFragment extends Fragment {
 
     RecyclerView recyclerView;
     LPLectureTabAdapter adapter;
-    ArrayList<String> titles;
+    ArrayList<Lecture> lectures;
     private static View view;
 
     @Nullable
@@ -48,28 +49,18 @@ public class LPLectureTabFragment extends Fragment {
 
         }
 
-
+        int selectedPosition  = getActivity().getIntent().getIntExtra("selectedPosition",0);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.lecturePlayerLectureTabRecyclerView);
-        titles = new ArrayList<>();
-        adapter = new LPLectureTabAdapter(getActivity(),titles);
+        lectures = new ArrayList<>();
+        lectures = (ArrayList<Lecture>) getActivity().getIntent().getSerializableExtra("lectureList");
+        adapter = new LPLectureTabAdapter(getActivity(),lectures,selectedPosition);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter.notifyDataSetChanged();
 
-
-        fetchData();
         return view;
     }
 
-    private void fetchData() {
-
-        titles.add(0,"Introduction");
-        titles.add(1,"Domain");
-        titles.add(2,"Range");
-        titles.add(3,"Graph");
-        titles.add(4,"Practice Problems");
-
-        adapter.notifyDataSetChanged();
-    }
 
 }

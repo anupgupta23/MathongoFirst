@@ -7,6 +7,12 @@
     android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <View
+        android:id="@+id/categoryLineColor"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/cardview_shadow_start_color" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,11 +22,11 @@
             android:id="@+id/LibraryCourseItemTitle"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="@string/sampleTitle"
             android:textColor="@android:color/background_dark"
             android:textSize="16sp"
             android:textStyle="bold" />
+<!--
 
         <ImageButton
             android:id="@+id/LibraryCourseItemBookMarkButton"
@@ -30,6 +36,7 @@
             android:layout_alignParentRight="true"
             android:background="@android:color/transparent"
             android:src="@drawable/bookmarkgray" />
+-->
 
 
         <RatingBar
@@ -43,18 +50,18 @@
             android:rating="3.5"
             android:stepSize="0.5" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/LibraryCourseItemFollowersTextView"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_alignEnd="@+id/LibraryCourseItemTitle"
-            android:layout_below="@+id/LibraryCourseItemTitle"
             android:drawableLeft="@drawable/accountgray"
             android:gravity="center"
             android:text="23K Followers"
             android:textAllCaps="false"
             android:textColor="@color/colorGray"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:layout_below="@+id/LibraryCourseItemTitle"
+            android:layout_alignEnd="@+id/LibraryCourseItemTitle" />-->
 
         <TextView
             android:id="@+id/LibraryCourseItemDescription"
@@ -87,7 +94,7 @@
             android:textSize="12sp"
             android:textStyle="bold" />
 
-        <Button
+<!--        <Button
             android:id="@+id/LibraryCourseItemEnrollButton"
             android:layout_width="110dp"
             android:layout_height="30dp"
@@ -100,16 +107,19 @@
             android:background="@drawable/button_shape"
             android:text="Enroll"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white" />-->
 
 
-        <View
+       <!-- <View
             android:layout_width="6dp"
             android:layout_height="6dp"
             android:layout_below="@+id/LibraryCourseItemTitle"
             android:layout_margin="7dp"
             android:layout_toRightOf="@+id/LibraryCourseItemRatingbar"
-            android:background="@drawable/circularseperator" />
+            android:background="@drawable/circularseperator" />-->
+
+
+
 
     </RelativeLayout>
 

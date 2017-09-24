@@ -18,7 +18,7 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <ImageButton
+<!--    <ImageButton
         android:id="@+id/LibraryCourseItemBookMarkButton"
         android:layout_width="30dp"
         android:layout_height="50dp"
@@ -27,7 +27,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginTop="5dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true" />-->
 
     <RatingBar
         android:id="@+id/LibraryCourseItemRatingbar"
@@ -35,14 +35,15 @@
         android:layout_width="80dp"
         android:layout_height="20dp"
         android:layout_alignStart="@+id/LibraryCourseItemTitle"
-        android:layout_alignTop="@+id/LibraryCourseItemFollowersTextView"
+        android:layout_below="@+id/LibraryCourseItemTitle"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
         android:numStars="5"
         android:progressTint="@color/Ratingbar"
         android:rating="3.5"
         android:stepSize="0.5" />
 
-    <TextView
+  <!--  <TextView
         android:id="@+id/LibraryCourseItemFollowersTextView"
         android:layout_width="100dp"
         android:layout_height="20dp"
@@ -54,7 +55,7 @@
         android:text="23K Enrolled"
         android:textColor="@color/textColor01"
         android:textSize="12sp" />
-
+-->
     <TextView
         android:id="@+id/LibraryCourseItemDescription"
         android:layout_width="match_parent"
@@ -67,11 +68,12 @@
 
     <Button
         android:id="@+id/LibraryCourseItemEnrollButton"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="35dp"
         android:layout_below="@id/LibraryCourseItemDescription"
         android:layout_margin="10dp"
         android:textAllCaps="false"
+        android:textSize="15sp"
         android:textColor="@color/cardview_light_background"
         android:background="@drawable/button_shape"
         android:text="Enroll" />
@@ -85,6 +87,7 @@
         android:layout_marginLeft="11dp"
         android:gravity="center"
         android:text="MATHEMATICS > Functions"
+        android:textAllCaps="true"
         android:textColor="@color/colorLightGray" />
 
 

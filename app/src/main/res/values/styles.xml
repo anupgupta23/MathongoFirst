@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -41,7 +42,15 @@
 <style name="RatingBarCustom" parent="Base.Widget.AppCompat.RatingBar.Small">
     <item name="android:color">#ffffb75d</item>
 </style>
+    
+    <style name = "Widget.Design.TextInputLayout." parent="Widget.Design.TextInputLayout.">
+        <item name="android:colorActivatedHighlight">@color/textColor01</item>
+        <item name="colorControlActivated">@color/textColor01</item>
+        <item name="colorControlHighlight">@color/textColor01</item>
+    </style>
 
-
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/textColor01</item>
+    </style>
 
 </resources>

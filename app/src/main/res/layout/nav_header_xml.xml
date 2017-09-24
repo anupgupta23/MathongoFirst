@@ -2,29 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/activity_vertical_margin">
+    android:layout_height="150dp"
+    android:background="@drawable/loginbackground">
 
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/image"
-            android:layout_marginLeft="65dp"
-            android:layout_marginRight="5dp"
-            android:id="@+id/imageViewNavigationDrawer"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageViewNavigationDrawer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/image"
+        android:layout_marginStart="10dp"
+        android:layout_above="@+id/textViewNameNavigationDrawer"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="11dp" />
 
     <TextView
         android:id="@+id/textViewNameNavigationDrawer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/imageViewNavigationDrawer"
+        android:layout_above="@+id/textViewIdentityNavigationDrawer"
+        android:layout_alignStart="@+id/textViewIdentityNavigationDrawer"
+        android:layout_marginBottom="11dp"
         android:text="John Doe"
-        android:textColor="@android:color/background_dark"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="normal|bold" />
 
@@ -32,9 +34,10 @@
         android:id="@+id/textViewIdentityNavigationDrawer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textViewNameNavigationDrawer"
-        android:layout_below="@+id/textViewNameNavigationDrawer"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageViewNavigationDrawer"
+        android:layout_marginBottom="12dp"
         android:text="Student"
-        android:textColor="@color/colorGray" />
+        android:textColor="@android:color/white" />
 </RelativeLayout>
 

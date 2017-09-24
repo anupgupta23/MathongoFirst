@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.learnacad.learnacad.Fragments.ComingSoonFragment;
 import com.learnacad.learnacad.Fragments.LPLectureTabFragment;
 
 /**
@@ -22,19 +21,13 @@ public class LecturePlayerViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if(position == 0){
-
-            return new LPLectureTabFragment();
-        }else{
-
-           return new ComingSoonFragment();
-        }
+        return new LPLectureTabFragment();
     }
 
 
 
     @Override
     public int getCount() {
-        return 3;
+        return 1;
     }
 }

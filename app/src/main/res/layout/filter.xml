@@ -1,135 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundBlue">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="15dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewFilter"
-            android:text="Filters"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/cardview_light_background"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
 
-        <Button
-            android:id="@+id/filterDoneButton"
-            android:layout_width="40dp"
-            android:layout_height="20dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:background="@android:color/transparent"
-            android:text="DONE"
-            android:textColor="@color/cardview_light_background"
-            android:textStyle="bold" />
+            <ImageButton
+                android:id="@+id/cancelFilterButton"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/closeicon" />
 
-        <Button
-            android:id="@+id/filterClearButton"
-            android:layout_width="45dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/filterDoneButton"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="10dp"
-            android:layout_toStartOf="@+id/filterDoneButton"
-            android:background="@android:color/transparent"
-            android:text="CLEAR"
-            android:textColor="@color/cardview_light_background"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewFilter"
+                android:text="Filters"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/cardview_light_background"
+                android:layout_marginBottom="15dp"
+                android:layout_alignParentTop="true"/>
+
+            <Button
+                android:id="@+id/filterApplyButton"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="APPLY"
+                android:textAlignment="textEnd"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_above="@+id/textViewSubject" />
 
 
-        <TextView
-            android:id="@+id/textViewSubject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/subjecticon"
-            android:drawablePadding="10dp"
-            android:gravity="center"
-            android:paddingLeft="5dp"
-            android:text="SUBJECT"
-            android:layout_below="@+id/textViewFilter"
-            android:textColor="@color/cardview_light_background"
-            android:textStyle="bold" />
 
-                <LinearLayout
+            <Button
+                android:id="@+id/filterResetButton"
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="RESET"
+                android:textAlignment="textEnd"
+                android:layout_alignTop="@+id/filterApplyButton"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold"
+                android:layout_toStartOf="@+id/filterApplyButton"
+                android:layout_alignBottom="@+id/filterApplyButton" />
+
+
+            <TextView
+                android:id="@+id/textViewSubject"
+                style="@android:style/Widget.DeviceDefault.Light.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewFilter"
+                android:drawableLeft="@drawable/subjecticon"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="Subject "
+                android:textAllCaps="false"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewSubject"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout2">
+
+
+                <CheckBox
+                    android:id="@+id/filterSubjectPhysicsCheckBox"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/textViewSubject"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical"
-                    android:id="@+id/linearLayout2">
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/linearLayout2"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/linearLayout2"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:text="Physics"
+                    android:textColor="@color/cardview_light_background"
+
+                    app:buttonTint="@color/colorLightGray" />
 
 
-                    <CheckBox
-                        android:id="@+id/filterSubjectPhysicsCheckBox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_below="@+id/linearLayout2"
-                        android:layout_marginStart="29dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/linearLayout2"
-                        android:layout_weight="1"
-                        android:drawablePadding="5dp"
-                        android:text="Physics"
-                        android:textColor="@color/cardview_light_background"
-                        android:textStyle="bold"
-                        app:buttonTint="@color/colorLightGray" />
+                <CheckBox
+                    android:id="@+id/filterSubjectChemistryCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/filterSubjectPhysicsCheckBox"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/linearLayout2"
+                    android:text="Chemistry"
+                    android:textColor="@color/cardview_light_background"
 
-
-                    <CheckBox
-                        android:id="@+id/filterSubjectChemistryCheckBox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_below="@+id/filterSubjectPhysicsCheckBox"
-                        android:layout_marginStart="29dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/linearLayout2"
-                        android:text="Chemistry"
-                        android:textColor="@color/cardview_light_background"
-                        android:textStyle="bold"
-                        app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/colorLightGray" />
 
 
 
-                    <CheckBox
-                        android:id="@+id/filterSubjectMathsCheckBox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_below="@+id/filterSubjectChemistryCheckBox"
-                        android:layout_marginStart="29dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/linearLayout2"
-                        android:text="Maths"
-                        android:textColor="@color/cardview_light_background"
-                        android:textStyle="bold"
-                        app:buttonTint="@color/colorLightGray" />
+                <CheckBox
+                    android:id="@+id/filterSubjectMathsCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/filterSubjectChemistryCheckBox"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/linearLayout2"
+                    android:text="Maths"
+                    android:textColor="@color/cardview_light_background"
 
-                </LinearLayout>
+                    app:buttonTint="@color/colorLightGray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/pen"
-            android:gravity="center"
-            android:layout_below="@+id/linearLayout2"
-            android:drawablePadding="10dp"
-            android:paddingTop="10dp"
-            android:text="CATEGORY"
-            android:id="@+id/textViewExamination"
-            android:textColor="@color/cardview_light_background"
-            android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewExamination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linearLayout2"
+                android:drawableLeft="@drawable/pen"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Category "
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold" />
 
 
             <LinearLayout
@@ -153,7 +174,7 @@
                     android:drawablePadding="5dp"
                     android:text="JEE Mains"
                     android:textColor="@color/cardview_light_background"
-                    android:textStyle="bold"
+
                     app:buttonTint="@color/colorLightGray" />
 
 
@@ -168,7 +189,7 @@
                     android:layout_toEndOf="@+id/linearLayout3"
                     android:text="JEE Advanced"
                     android:textColor="@color/cardview_light_background"
-                    android:textStyle="bold"
+
                     app:buttonTint="@color/colorLightGray" />
 
 
@@ -184,99 +205,212 @@
                     android:layout_toEndOf="@+id/linearLayout3"
                     android:text="CBSE"
                     android:textColor="@color/cardview_light_background"
-                    android:textStyle="bold"
+
+                    app:buttonTint="@color/colorLightGray" />
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linearLayout3"
+                android:drawableLeft="@drawable/school"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Class "
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewClass"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout4">
+
+
+                <CheckBox
+                    android:id="@+id/filterClass12CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/textViewClass"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/linearLayout4"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:text="XII"
+                    android:textColor="@color/cardview_light_background"
+
                     app:buttonTint="@color/colorLightGray" />
 
 
                 <CheckBox
-                    android:id="@+id/filterCategoryBITSATCheckBox"
+                    android:id="@+id/filterClass11CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:layout_below="@+id/filterCategoryCBSECheckBox"
+                    android:layout_below="@+id/filterClass12CheckBox"
                     android:layout_marginStart="29dp"
                     android:layout_marginTop="10dp"
-                    android:layout_toEndOf="@+id/linearLayout3"
-                    android:text="BITSAT"
+                    android:layout_toEndOf="@+id/linearLayout4"
+                    android:text="XI"
                     android:textColor="@color/cardview_light_background"
-                    android:textStyle="bold"
+
+                    app:buttonTint="@color/colorLightGray" />
+
+
+
+                <CheckBox
+                    android:id="@+id/filterClass10CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/filterClass11CheckBox"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/linearLayout4"
+                    android:text="X"
+                    android:textColor="@color/cardview_light_background"
+
+                    app:buttonTint="@color/colorLightGray" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewDifficulty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linearLayout4"
+                android:drawableLeft="@drawable/difficulty"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Difficulty"
+                android:textStyle="bold"
+                android:textColor="@color/cardview_light_background"
+
+                tools:text="Difficulty" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewDifficulty"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout5">
+
+
+                <CheckBox
+                    android:id="@+id/filterDifficultyBeginner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:text="Beginner"
+                    android:textColor="@color/cardview_light_background"
+
+                    app:buttonTint="@color/colorLightGray" />
+
+
+
+                <CheckBox
+                    android:id="@+id/filterDifficultyIntermediate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:text="Intermediate"
+                    android:textColor="@color/cardview_light_background"
+
+                    app:buttonTint="@color/colorLightGray" />
+
+
+
+                <CheckBox
+                    android:id="@+id/filterDifficultyAdvanced"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:text="Advanced"
+                    android:textColor="@color/cardview_light_background"
+
                     app:buttonTint="@color/colorLightGray" />
 
             </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/school"
-            android:gravity="center"
-            android:layout_below="@+id/linearLayout3"
-            android:drawablePadding="10dp"
-            android:paddingTop="10dp"
-            android:text="CLASS"
-            android:id="@+id/textViewClass"
-            android:textColor="@color/cardview_light_background"
-            android:textStyle="bold" />
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textViewClass"
-            android:layout_marginStart="10dp"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout4">
-
-
-            <CheckBox
-                android:id="@+id/filterClass12CheckBox"
+            <TextView
+                android:id="@+id/textViewMedium"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_below="@+id/textViewClass"
-                android:layout_marginStart="29dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/linearLayout4"
-                android:layout_weight="1"
-                android:drawablePadding="5dp"
-                android:text="XII"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linearLayout5"
+                android:drawableLeft="@drawable/difficulty"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Medium"
                 android:textColor="@color/cardview_light_background"
-                android:textStyle="bold"
-                app:buttonTint="@color/colorLightGray" />
+                android:textStyle="bold" />
 
 
-            <CheckBox
-                android:id="@+id/filterClass11CheckBox"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_below="@+id/filterClass12CheckBox"
-                android:layout_marginStart="29dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/linearLayout4"
-                android:text="XI"
-                android:textColor="@color/cardview_light_background"
-                android:textStyle="bold"
-                app:buttonTint="@color/colorLightGray" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewMedium"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout6">
+
+
+                <CheckBox
+                    android:id="@+id/filterMediumEnglish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:text="English"
+                    android:textColor="@color/cardview_light_background"
+                    app:buttonTint="@color/colorLightGray" />
 
 
 
-            <CheckBox
-                android:id="@+id/filterClass10CheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_below="@+id/filterClass11CheckBox"
-                android:layout_marginStart="29dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/linearLayout4"
-                android:text="X"
-                android:textColor="@color/cardview_light_background"
-                android:textStyle="bold"
-                app:buttonTint="@color/colorLightGray" />
+                <CheckBox
+                    android:id="@+id/filterMediumHindi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:text="Hindi"
+                    android:textColor="@color/cardview_light_background"
+                    app:buttonTint="@color/colorLightGray" />
 
 
-        </LinearLayout>
+            </LinearLayout>
 
 
-    </RelativeLayout>
 
-</ScrollView>
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

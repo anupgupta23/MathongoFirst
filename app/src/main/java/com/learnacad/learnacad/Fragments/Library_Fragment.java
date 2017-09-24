@@ -1,5 +1,8 @@
 package com.learnacad.learnacad.Fragments;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,7 +45,7 @@ public class Library_Fragment extends Fragment {
 
         }
 
-//        setHasOptionsMenu(true);
+       setHasOptionsMenu(true);
 
 
 
@@ -53,9 +56,18 @@ public class Library_Fragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+        if(!isConnected()){
+
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.content_frame,new NoInternetConnectionFragment());
+            fragmentTransaction.commit();
+            return;
+        }
+
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame_Library,new Library_Top_Fragment());
+        fragmentTransaction.replace(R.id.content_frame,new LibraryCourseListFragment());
         fragmentTransaction.addToBackStack(null).commit();
     }
 
@@ -63,7 +75,7 @@ public class Library_Fragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-       // menu.clear();
+       menu.clear();
         inflater.inflate(R.menu.menu_library,menu);
     }
 
@@ -74,11 +86,23 @@ public class Library_Fragment extends Fragment {
 
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.content_frame_Library,new Filters());
+            ft.replace(R.id.content_frame,new Filters());
             ft.addToBackStack(null).commit();
 
         }
 
         return true;
     }
+
+    public boolean isConnected(){
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+
+
+        return (activeNetwork != null && (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI || activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE));
+
+    }
+
 }

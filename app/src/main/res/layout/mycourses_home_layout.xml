@@ -1,32 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="Enrolled"
-        android:layout_weight="0.2"/>
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:name="com.learnacad.learnacad.Fragments.Enrolled_Fragment"
-        android:id="@+id/myCoursesFragmentEnrolled"/>
+        android:layout_height="match_parent"
+        android:id="@+id/mycoursesRecyclerView"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="Completed"
-        android:layout_weight="0.2"/>
-
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:name="com.learnacad.learnacad.Fragments.CompletedMyCoursesFragment"
-        android:id="@+id/myCoursesFragmentCompleted"/>
-
-
-</LinearLayout>
+</RelativeLayout>
