@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,12 +18,16 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.learnacad.learnacad.Fragments.Bookmarks_Fragment;
 import com.learnacad.learnacad.Fragments.LibraryCourseListFragment;
 import com.learnacad.learnacad.Fragments.Library_Fragment;
@@ -60,6 +65,7 @@ public class BaseActivity extends AppCompatActivity
     private  NavigationView navigationView;
     public static MyCoursesEnrolled coursesEnrolled;
     boolean doubleBackPressToExitPressedOnce = false;
+    private FirebaseAnalytics firebaseAnalytics;
 
 
     @Override
@@ -68,13 +74,14 @@ public class BaseActivity extends AppCompatActivity
         setContentView(R.layout.activity_base);
 
         SugarRecord.deleteAll(MyCoursesEnrolled.class);
-
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        firebaseAnalytics.setAnalyticsCollectionEnabled(true);
 
 /*        View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);*/
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
       //  Toolbar bottomToolbar = (Toolbar) findViewById(R.id.toolbarBottom);
@@ -89,6 +96,8 @@ public class BaseActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
+
         if(isConnected()) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_frame, new Library_Fragment());
@@ -99,6 +108,34 @@ public class BaseActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.content_frame, new NoInternetConnectionFragment());
             fragmentTransaction.commit();
         }
+
+
+        final FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+
+        final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.splashRelativeLayout);
+
+        Intent intent = getIntent();
+        boolean isSplashDone = intent.getBooleanExtra("SPLASH SHOWN",false);
+
+        if(!isSplashDone) {
+            frameLayout.setVisibility(View.GONE);
+            toolbar.setVisibility(View.GONE);
+            relativeLayout.setVisibility(View.VISIBLE);
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    relativeLayout.setVisibility(View.GONE);
+                    frameLayout.setVisibility(View.VISIBLE);
+                    toolbar.setVisibility(View.VISIBLE);
+
+                }
+            }, 2329);
+        }
+
+
 
 
 //        drawer.setDrawerShadow();
@@ -121,35 +158,44 @@ public class BaseActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-          //  super.onBackPressed();
 
-            for(int i = 0; i < navigationView.getMenu().size(); ++i){
+            FragmentManager fm = getSupportFragmentManager();
 
-                navigationView.getMenu().getItem(i).setChecked(false);
-            }
+            if (fm.getBackStackEntryCount() == 1) {
 
-            if(doubleBackPressToExitPressedOnce) {
+                for (int i = 0; i < navigationView.getMenu().size(); ++i) {
 
-                Intent startMain = new Intent(Intent.ACTION_MAIN);
-                startMain.addCategory(Intent.CATEGORY_HOME);
-                startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(startMain);
-                return;
-            }
-
-            this.doubleBackPressToExitPressedOnce = true;
-            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    doubleBackPressToExitPressedOnce = false;
+                    navigationView.getMenu().getItem(i).setChecked(false);
                 }
-            },2000);
+
+                if (doubleBackPressToExitPressedOnce) {
+                    Intent startMain = new Intent(Intent.ACTION_MAIN);
+                    startMain.addCategory(Intent.CATEGORY_HOME);
+                    startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(startMain);
+                    return;
+                }
+                Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+                this.doubleBackPressToExitPressedOnce = true;
+
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        doubleBackPressToExitPressedOnce = false;
+                    }
+                }, 2000);
+            } else {
+
+                super.onBackPressed();
+            }
+
 
         }
-    }
+
+        }
+
 
     public static void getMyCourses(){
 
@@ -322,8 +368,21 @@ public class BaseActivity extends AppCompatActivity
                     return true;
                 }
 
-                LogoutAsyncTask logoutTask = new LogoutAsyncTask();
-                logoutTask.execute(Api_Urls.BASE_URL);
+               SweetAlertDialog dialog =  new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Are you sure?")
+                        .setConfirmText("Logout!?")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                LogoutAsyncTask logoutTask = new LogoutAsyncTask();
+                                logoutTask.execute(Api_Urls.BASE_URL);
+                            }
+                        });
+
+                dialog.setCancelable(true);
+                dialog.show();
+
+
 
             }
             break;

@@ -6,7 +6,10 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp">
+        android:paddingTop="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/attachedLayoutTitleTextView"
@@ -34,18 +37,18 @@
             android:layout_marginBottom="15dp"
             android:textColor="@color/colorGray" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/attachedLayoutDescriptionTextView"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/attachedLayoutDescriptionTextView">
 
             <Button
                 android:id="@+id/attachedUpvotesButton"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/upvoteicon"
                 android:text="5K Upvotes"
@@ -76,9 +79,11 @@
 
             <Button
                 android:id="@+id/attachedUReportButton"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_alignParentTop="true"
+                android:layout_alignTop="@+id/attachedUpvotesButton"
+                android:layout_toEndOf="@+id/attachedUpvotesButton"
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/reporticon"
                 android:text="Report Error"
@@ -87,17 +92,17 @@
 
             <Button
                 android:id="@+id/attachedBookmarkButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:background="@drawable/button_shape"
+                android:layout_margin="10dp"
+                android:layout_alignParentEnd="true"
                 android:text="Bookmark"
-                android:layout_marginEnd="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="20dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

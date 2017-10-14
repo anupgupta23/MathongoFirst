@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LearnAcad</string>
+    <string name="app_name">MathonGo</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -12,4 +12,7 @@
 
     <string name="sampledesc">Lorem ipsum dolor sit amet consectetur adipelit aut perferendis dolor numquam enim.</string>
     <string name="sampleTitle">Greatest Integer Function</string>
+
+    <string name="more">…<font fgcolor = "blue">...View More</font></string>
+    <string name="google_analytics_tracking_id">UA-108063473-1</string>
 </resources>

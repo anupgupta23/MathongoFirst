@@ -13,9 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="11dp"
         android:layout_marginTop="25dp"
+        android:layout_marginBottom="5dp"
         android:text="Greatest Integer Function"
-        android:textColor="@color/cardview_light_background"
-        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 <!--    <ImageButton
@@ -29,7 +30,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />-->
 
-    <RatingBar
+    <android.support.v7.widget.AppCompatRatingBar
         android:id="@+id/LibraryCourseItemRatingbar"
         style="@style/RatingBarCustom"
         android:layout_width="80dp"
@@ -39,7 +40,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp"
         android:numStars="5"
-        android:progressTint="@color/Ratingbar"
+        android:progressTint="@color/white"
         android:rating="3.5"
         android:stepSize="0.5" />
 
@@ -69,13 +70,13 @@
     <Button
         android:id="@+id/LibraryCourseItemEnrollButton"
         android:layout_width="120dp"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_below="@id/LibraryCourseItemDescription"
         android:layout_margin="10dp"
         android:textAllCaps="false"
         android:textSize="15sp"
         android:textColor="@color/cardview_light_background"
-        android:background="@drawable/button_shape"
+        android:background="@drawable/enrollbackblue"
         android:text="Enroll" />
 
 
@@ -85,10 +86,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="11dp"
+        android:textStyle="bold"
         android:gravity="center"
-        android:text="MATHEMATICS > Functions"
-        android:textAllCaps="true"
-        android:textColor="@color/colorLightGray" />
+        android:text="Mathematics > Functions"
+        android:textColor="@color/lightBlue" />
 
 
 

@@ -7,6 +7,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/splashRelativeLayout"
+        android:background="@drawable/loginbackground">
+        <ImageView
+            android:layout_width="274dp"
+            android:id="@+id/splashImageView"
+            android:layout_height="105dp"
+            android:src="@drawable/logo"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="233dp" />
+
+    </RelativeLayout>
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,9 +39,9 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@color/backgroundBlue"
                 android:minHeight="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                android:theme="@style/customDrawer"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:titleTextColor="@android:color/white" />
 
@@ -38,6 +56,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1.5" />
+
+
 
              <!--   <fragment
                     android:id="@+id/fragmentButtonPanel"
@@ -61,6 +81,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header_xml"
-        app:itemTextColor="@color/colorGray"
+        app:itemTextColor="@color/drawer_item"
+        app:itemIconTint="@color/drawer_item"
+        app:itemBackground="@android:color/transparent"
         app:menu="@menu/activity_home_drawer" />
 </android.support.v4.widget.DrawerLayout>

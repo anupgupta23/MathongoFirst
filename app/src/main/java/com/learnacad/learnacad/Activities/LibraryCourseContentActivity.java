@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -141,8 +143,6 @@ public class LibraryCourseContentActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-
-
             }
 
             @Override
@@ -321,7 +321,8 @@ public class LibraryCourseContentActivity extends AppCompatActivity {
         descriptionTextView.setText(minicourse.getDescription());
         previousToCurr.setText(minicourse.getSubject() + " > " + minicourse.getCourseName());
         ratingBar.setRating(minicourse.getRating());
-
+        Drawable drawable = ratingBar.getProgressDrawable();
+        drawable.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void fetchData() {

@@ -41,7 +41,7 @@ public class BookmarksListAdapter  extends RecyclerView.Adapter<BookmarksListAda
     @Override
     public void onBindViewHolder(BookmarksListAdapter.BookmarksListViewHolder holder, final int position) {
 
-        holder.textViewNumber.setVisibility(View.GONE);
+        holder.textViewNumber.setText(position + 1 + ". ");
         holder.durationTextView.setText(bookmarks.get(position).getDuration());
         holder.titleTextView.setText(bookmarks.get(position).getName());
 

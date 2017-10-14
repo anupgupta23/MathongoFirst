@@ -95,7 +95,6 @@ public class Register_Fragment extends Fragment {
         Button registerButton = (Button) view.findViewById(R.id.buttonRegisterRegisterFragment);
         Button loginButton = (Button) view.findViewById(R.id.RegisterLoginButton);
 
-        loginButton.setTypeface(typefaceMedium);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,50 +149,90 @@ public class Register_Fragment extends Fragment {
 
                 if(name.isEmpty()){
 
-                    nameEditText.setError("Enter Name");
+                    Snackbar snackbar1 = Snackbar.make(view,"Enter name",Snackbar.LENGTH_LONG);
+                    View view1 = snackbar1.getView();
+                    TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
+                    textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
+                    textView.setCompoundDrawablePadding(8);
+                    snackbar1.show();
                     return;
+
                 }
 
                 if (email.isEmpty()){
 
 
-                    emailEditText.setError("Enter email");
+                    Snackbar snackbar1 = Snackbar.make(view,"Enter email",Snackbar.LENGTH_LONG);
+                    View view1 = snackbar1.getView();
+                    TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
+                    textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
+                    textView.setCompoundDrawablePadding(8);
+                    snackbar1.show();
                     return;
                 }
 
                 if (password.isEmpty()){
 
-                    passwordEditText.setError("Enter Password");
+                    Snackbar snackbar1 = Snackbar.make(view,"Enter password",Snackbar.LENGTH_LONG);
+                    View view1 = snackbar1.getView();
+                    TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
+                    textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
+                    textView.setCompoundDrawablePadding(8);
+                    snackbar1.show();
                     return;
                 }
 
                 if(pincode.isEmpty() || (pincode.length() < 6)){
 
-                    pincodeEditText.setError("Enter a valid picncode");
+                    Snackbar snackbar1 = Snackbar.make(view,"Enter a valid pincode.",Snackbar.LENGTH_LONG);
+                    View view1 = snackbar1.getView();
+                    TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
+                    textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
+                    textView.setCompoundDrawablePadding(8);
+                    snackbar1.show();
                     return;
                 }
 
                 if(!isValidEmail(email)){
 
-                    emailEditText.setError("Enter a valid email address");
+                    Snackbar snackbar1 = Snackbar.make(view,"Enter a valid email address.",Snackbar.LENGTH_LONG);
+                    View view1 = snackbar1.getView();
+                    TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
+                    textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
+                    textView.setCompoundDrawablePadding(8);
+                    snackbar1.show();
                     return;
                 }
 
 
                 if(mobileNum.isEmpty() || mobileNum.length() < 10){
 
-                    mobileNumEditText.setError("Enter a valid mobile number");
+                    Snackbar snackbar1 = Snackbar.make(view,"Enter a valid mobile number.",Snackbar.LENGTH_LONG);
+                    View view1 = snackbar1.getView();
+                    TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
+                    textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
+                    textView.setCompoundDrawablePadding(8);
+                    snackbar1.show();
                     return;
                 }
 
                 if(classChosen.contentEquals("Class")){
 
-                    new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Oops...")
-                            .setContentText("No class selected.\n Please select a class to continue.")
-                            .show();
-
+                    Snackbar snackbar1 = Snackbar.make(view,"Choose a class",Snackbar.LENGTH_LONG);
+                    View view1 = snackbar1.getView();
+                    TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
+                    textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
+                    textView.setCompoundDrawablePadding(8);
+                    snackbar1.show();
                     return;
+
                 }
 
 
@@ -214,8 +253,9 @@ public class Register_Fragment extends Fragment {
                     Snackbar snackbar1 = Snackbar.make(view,"No Internet Connection.Please try again.",Snackbar.LENGTH_LONG);
                     View view1 = snackbar1.getView();
                     TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
                     textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
-                    textView.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(android.support.design.R.dimen.design_snackbar_padding_horizontal));
+                    textView.setCompoundDrawablePadding(8);
                     snackbar1.show();
                     return;
 

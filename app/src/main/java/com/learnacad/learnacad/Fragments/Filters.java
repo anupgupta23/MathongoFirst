@@ -31,8 +31,8 @@ public class Filters extends Fragment {
     View view;
     Filter filter;
     Bundle checkedSaving;
-    FiltersViewModel mViewModel;
 
+    FiltersViewModel mViewModel;
 
       CheckBox subjectPhysicsCB;
       CheckBox subjectMathsCB;
@@ -166,6 +166,7 @@ public class Filters extends Fragment {
 
                 if(subjectPhysicsCB.isChecked()){
 
+
                     filter.getSubjectArray().add(String.valueOf(CONSTANTS.SUBJECT_PHYSICS));
                     checked.add("Physics");
                     mViewModel.setSubjectPhysicsCB(true);
@@ -181,6 +182,7 @@ public class Filters extends Fragment {
                     checked.add("Chemistry");
                     mViewModel.subjectChemistryCB = true;
 
+
                 }else{
 
                     mViewModel.setSubjectChemistryCB(false);
@@ -191,6 +193,7 @@ public class Filters extends Fragment {
                     filter.getSubjectArray().add(String.valueOf(CONSTANTS.SUBJECT_MATHS));
                     checked.add("Maths");
                     mViewModel.subjectMathsCB = true;
+
 
                 }else{
 
@@ -205,6 +208,8 @@ public class Filters extends Fragment {
                     checked.add("JEE Mains");
                     mViewModel.categoryMainsCB = true;
 
+
+
                 }else{
 
                     mViewModel.setCategoryMainsCB(false);
@@ -215,6 +220,8 @@ public class Filters extends Fragment {
                     filter.getCategoryArray().add(String.valueOf(CONSTANTS.CATEGORY_CBSE));
                     checked.add("CBSE");
                     mViewModel.categorycbseCB = true;
+
+
                 }else{
 
                     mViewModel.setCategorycbseCB(false);
@@ -225,6 +232,8 @@ public class Filters extends Fragment {
                     filter.getCategoryArray().add(String.valueOf(CONSTANTS.CATEGORY_ADVANCED));
                     mViewModel.categoryAdvancedCB = true;
                     checked.add("JEE Advanced");
+
+
                 }else{
 
 
@@ -238,6 +247,7 @@ public class Filters extends Fragment {
                     filter.getClassArray().add(String.valueOf(CONSTANTS.CLASS_12));
                     mViewModel.classXIICB = true;
 
+
                     checked.add("XII");
                 }else{
 
@@ -248,6 +258,7 @@ public class Filters extends Fragment {
 
                     filter.getClassArray().add(String.valueOf(CONSTANTS.CLASS_11));
                     mViewModel.classXICB = true;
+
 
                     checked.add("XI");
                 }else{
@@ -260,6 +271,8 @@ public class Filters extends Fragment {
                     filter.getClassArray().add(String.valueOf(CONSTANTS.CLASS_10));
                     mViewModel.classXCB = true;
                     checked.add("X");
+
+
                 }else{
 
                     mViewModel.setClassXCB(false);
@@ -273,6 +286,7 @@ public class Filters extends Fragment {
 
                     mViewModel.diffBeginnerCB = true;
 
+
                     checked.add("Beginner");
                 }else{
 
@@ -283,6 +297,7 @@ public class Filters extends Fragment {
 
                     filter.getDifficultyArray().add("Intermediate");
                     mViewModel.diffIntermediateCB = true;
+
 
                     checked.add("Intermediate");
                 }else{
@@ -297,6 +312,8 @@ public class Filters extends Fragment {
                     filter.getDifficultyArray().add("Advanced");
                     mViewModel.diffAdvancedCB = true;
                     checked.add("Advanced");
+
+
                 }else{
 
                     mViewModel.setDiffAdvancedCB(false);
@@ -309,6 +326,8 @@ public class Filters extends Fragment {
                     filter.getMediumArray().add("English");
                     mViewModel.mediumEnglishCB = true;
                     checked.add("English");
+
+
                 }else{
 
 
@@ -319,6 +338,8 @@ public class Filters extends Fragment {
 
                     filter.getMediumArray().add("Hindi");
                     mViewModel.mediumHindiCB = true;
+
+
                     checked.add("Hindi");
                 }else{
 

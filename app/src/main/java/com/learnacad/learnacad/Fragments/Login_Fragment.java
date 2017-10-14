@@ -103,21 +103,42 @@ public class Login_Fragment extends Fragment {
 
                 if (password.isEmpty()) {
 
-                    passwordEditText.setError("Enter Password");
+                    snackbar.dismiss();
+                    Snackbar snackbar1 = Snackbar.make(view,"Enter Password",Snackbar.LENGTH_LONG);
+                    View view1 = snackbar1.getView();
+                    TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
+                    textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
+                    textView.setCompoundDrawablePadding(8);
+                    snackbar1.show();
                     return;
                 }
 
                 if (email.isEmpty()) {
 
 
-                    emailEditText.setError("Enter email");
+                    snackbar.dismiss();
+                    Snackbar snackbar1 = Snackbar.make(view,"Enter email.",Snackbar.LENGTH_LONG);
+                    View view1 = snackbar1.getView();
+                    TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
+                    textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
+                    textView.setCompoundDrawablePadding(8);
+                    snackbar1.show();
                     return;
                 }
 
 
                 if (!isValidEmail(email)) {
 
-                    emailEditText.setError("Enter a valid email address");
+                    snackbar.dismiss();
+                    Snackbar snackbar1 = Snackbar.make(view,"Enter a valid email address.",Snackbar.LENGTH_LONG);
+                    View view1 = snackbar1.getView();
+                    TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
+                    textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
+                    textView.setCompoundDrawablePadding(8);
+                    snackbar1.show();
                     return;
                 }
 
@@ -132,8 +153,9 @@ public class Login_Fragment extends Fragment {
                     Snackbar snackbar1 = Snackbar.make(view,"No Internet Connection.Please try again.",Snackbar.LENGTH_LONG);
                     View view1 = snackbar1.getView();
                     TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
+                    view1.setPadding(0,0,0,0);
                     textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
-                    textView.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(android.support.design.R.dimen.design_snackbar_padding_horizontal));
+                    textView.setCompoundDrawablePadding(8);
                     snackbar1.show();
                     return;
 
@@ -151,7 +173,8 @@ public class Login_Fragment extends Fragment {
             View view = snackbar.getView();
             TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
             textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.greencircle,0,0,0);
-            textView.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(android.support.design.R.dimen.design_snackbar_padding_horizontal));
+            view.setPadding(0,0,0,0);
+        textView.setCompoundDrawablePadding(8);
             snackbar.show();
         AndroidNetworking.post(Api_Urls.BASE_URL+ "authorize")
                 .addUrlEncodeFormBodyParameter("email",email)
@@ -175,7 +198,10 @@ public class Login_Fragment extends Fragment {
                                 SessionManager session = new SessionManager(tokenId);
                                 SugarRecord.save(session);
                                 snackbar.dismiss();
-                                startActivity(new Intent(getActivity(), BaseActivity.class));
+
+                                Intent intent = new Intent(getActivity(), BaseActivity.class);
+                                intent.putExtra("SPLASH SHOWN",true);
+                                startActivity(intent);
                             }
                             else{
 
@@ -188,7 +214,8 @@ public class Login_Fragment extends Fragment {
                                 View view = snackbar1.getView();
                                 TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
                                 textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.redcircle,0,0,0);
-                                textView.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(android.support.design.R.dimen.design_snackbar_padding_horizontal));
+                                view.setPadding(0,0,0,0);
+                                textView.setCompoundDrawablePadding(8);
                                 snackbar1.show();
 //                                snackbar.show();
 //                                Toast.makeText(getContext(), message , Toast.LENGTH_SHORT).show();

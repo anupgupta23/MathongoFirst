@@ -21,50 +21,51 @@
                 android:id="@+id/cancelFilterButton"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:background="@android:color/transparent"
                 app:srcCompat="@drawable/closeicon" />
 
             <TextView
+                android:id="@+id/textViewFilter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewFilter"
-                android:text="Filters"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginStart="40dp"
-                android:textColor="@color/cardview_light_background"
+                android:layout_alignParentTop="false"
                 android:layout_marginBottom="15dp"
-                android:layout_alignParentTop="true"/>
+                android:layout_marginStart="40dp"
+                android:text="Filters"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/filterApplyButton"
-                android:layout_width="60dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
+                android:layout_above="@+id/textViewSubject"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
                 android:background="@android:color/transparent"
+                android:gravity="top"
                 android:text="APPLY"
                 android:textAlignment="textEnd"
                 android:textColor="@color/cardview_light_background"
-                android:textStyle="bold"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_above="@+id/textViewSubject" />
-
+                android:textStyle="bold" />
 
 
             <Button
                 android:id="@+id/filterResetButton"
-                android:layout_width="62dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/filterApplyButton"
+                android:layout_alignTop="@+id/filterApplyButton"
+                android:layout_toStartOf="@+id/filterApplyButton"
                 android:background="@android:color/transparent"
+                android:gravity="top"
                 android:text="RESET"
                 android:textAlignment="textEnd"
-                android:layout_alignTop="@+id/filterApplyButton"
                 android:textColor="@color/cardview_light_background"
-                android:textStyle="bold"
-                android:layout_toStartOf="@+id/filterApplyButton"
-                android:layout_alignBottom="@+id/filterApplyButton" />
+                android:textStyle="bold" />
 
 
             <TextView
@@ -78,6 +79,7 @@
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:text="Subject "
+                android:layout_marginTop="8dp"
                 android:textAllCaps="false"
                 android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
@@ -91,7 +93,7 @@
                 android:id="@+id/linearLayout2">
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterSubjectPhysicsCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -103,11 +105,10 @@
                     android:drawablePadding="5dp"
                     android:text="Physics"
                     android:textColor="@color/cardview_light_background"
+                    app:buttonTint="@color/white"/>
 
-                    app:buttonTint="@color/colorLightGray" />
 
-
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterSubjectChemistryCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -119,11 +120,11 @@
                     android:text="Chemistry"
                     android:textColor="@color/cardview_light_background"
 
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterSubjectMathsCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -135,7 +136,7 @@
                     android:text="Maths"
                     android:textColor="@color/cardview_light_background"
 
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
             </LinearLayout>
 
@@ -162,7 +163,7 @@
                 android:id="@+id/linearLayout3">
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterCategoryMainsCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -175,10 +176,10 @@
                     android:text="JEE Mains"
                     android:textColor="@color/cardview_light_background"
 
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterCategoryAdvancedCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -190,11 +191,11 @@
                     android:text="JEE Advanced"
                     android:textColor="@color/cardview_light_background"
 
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterCategoryCBSECheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -206,7 +207,7 @@
                     android:text="CBSE"
                     android:textColor="@color/cardview_light_background"
 
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
 
 
@@ -235,7 +236,7 @@
                 android:id="@+id/linearLayout4">
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterClass12CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -248,10 +249,10 @@
                     android:text="XII"
                     android:textColor="@color/cardview_light_background"
 
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterClass11CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -263,11 +264,11 @@
                     android:text="XI"
                     android:textColor="@color/cardview_light_background"
 
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterClass10CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -279,7 +280,7 @@
                     android:text="X"
                     android:textColor="@color/cardview_light_background"
 
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
 
             </LinearLayout>
@@ -309,7 +310,7 @@
                 android:id="@+id/linearLayout5">
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterDifficultyBeginner"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -318,13 +319,13 @@
                     android:layout_weight="1"
                     android:drawablePadding="5dp"
                     android:text="Beginner"
-                    android:textColor="@color/cardview_light_background"
+                    android:textColor="@color/white"
 
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterDifficultyIntermediate"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -334,12 +335,11 @@
                     android:drawablePadding="5dp"
                     android:text="Intermediate"
                     android:textColor="@color/cardview_light_background"
-
-                    app:buttonTint="@color/colorLightGray" />
-
+                    android:buttonTint="@color/white" />
 
 
-                <CheckBox
+
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterDifficultyAdvanced"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -350,7 +350,7 @@
                     android:text="Advanced"
                     android:textColor="@color/cardview_light_background"
 
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
             </LinearLayout>
 
@@ -359,7 +359,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearLayout5"
-                android:drawableLeft="@drawable/difficulty"
+                android:drawableLeft="@drawable/medium"
                 android:drawablePadding="10dp"
                 android:gravity="center"
                 android:paddingTop="10dp"
@@ -377,7 +377,7 @@
                 android:id="@+id/linearLayout6">
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterMediumEnglish"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -387,11 +387,11 @@
                     android:drawablePadding="5dp"
                     android:text="English"
                     android:textColor="@color/cardview_light_background"
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
 
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/filterMediumHindi"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -401,11 +401,10 @@
                     android:drawablePadding="5dp"
                     android:text="Hindi"
                     android:textColor="@color/cardview_light_background"
-                    app:buttonTint="@color/colorLightGray" />
+                    app:buttonTint="@color/white" />
 
 
             </LinearLayout>
-
 
 
         </RelativeLayout>

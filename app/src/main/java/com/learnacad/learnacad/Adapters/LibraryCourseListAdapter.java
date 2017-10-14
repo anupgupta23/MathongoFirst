@@ -2,6 +2,9 @@ package com.learnacad.learnacad.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,9 +17,13 @@ import android.widget.TextView;
 import com.learnacad.learnacad.Activities.LibraryCourseContentActivity;
 import com.learnacad.learnacad.Models.Minicourse;
 import com.learnacad.learnacad.Models.Tutor;
+import com.learnacad.learnacad.Networking.Api_Urls;
 import com.learnacad.learnacad.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Sahil Malhotra on 19-06-2017.
@@ -53,6 +60,8 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
         holder.textViewCourseItemDescription.setText(minicourses.get(position).getDescription());
         holder.textViewCourseItemTitle.setText(minicourses.get(position).getName());
         holder.ratingBar.setRating(minicourses.get(position).getRating());
+        Drawable drawable = holder.ratingBar.getProgressDrawable();
+        drawable.setColorFilter(Color.parseColor("#ffb75d"), PorterDuff.Mode.SRC_ATOP);
 
         String category = minicourses.get(position).getRelevance();
 
@@ -82,6 +91,18 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
             holder.linearColorView.setBackgroundResource(R.drawable.categoryall);
         }
 
+        Tutor t = tutors.get(position);
+        if(t.getImgUrl() == null || t.getImgUrl().length() == 0 || t.getImgUrl().isEmpty()){
+
+            holder.circleImageView.setImageResource(R.drawable.teachersicon);
+        }else {
+
+            Picasso.with(mContext)
+                    .load(Api_Urls.BASE_URL + "images/" + t.getImgUrl() + ".jpg")
+                    .error(R.drawable.teachersicon)
+                    .into(holder.circleImageView);
+
+        }
 /*
         if(minicourses.get(position).getEnrolled()){
 
@@ -157,6 +178,7 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
 //        Button enrollButton;
         RatingBar ratingBar;
         View linearColorView;
+        CircleImageView circleImageView;
 
         public LibraryCourseViewHolder(View itemView) {
             super(itemView);
@@ -166,6 +188,7 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
             ratingBar = (RatingBar) itemView.findViewById(R.id.LibraryCourseItemRatingbar);
 //            bookmarkButton = (ImageButton) itemView.findViewById(R.id.LibraryCourseItemBookMarkButton);
             textViewCourseItemTitle = (TextView) itemView.findViewById(R.id.LibraryCourseItemTitle);
+            circleImageView = (CircleImageView) itemView.findViewById(R.id.LibraryCourseItemCircleImageView);
             textViewCourseItemDescription = (TextView) itemView.findViewById(R.id.LibraryCourseItemDescription);
             textViewCourseItemTutorName = (TextView) itemView.findViewById(R.id.LibraryCourseItemTeacherNameTextView);
         }

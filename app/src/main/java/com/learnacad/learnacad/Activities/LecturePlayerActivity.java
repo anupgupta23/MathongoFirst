@@ -46,13 +46,10 @@ import static com.orm.SugarRecord.listAll;
 
 public class LecturePlayerActivity extends AppCompatActivity implements YouTubePlayer.OnInitializedListener{
 
-<<<<<<< Updated upstream
-    public static final String GOOGLE_DEVELOPER_KEY = "";
-    public static final String YOUTUBE_CODE = "K3lviiNR0pI";
-=======
+
+
     public static final String GOOGLE_DEVELOPER_KEY = "AIzaSyBrJtaqoS-xR6LdGTdlSHJm7pp8pBTGrEE";
     public static String YOUTUBE_CODE;
->>>>>>> Stashed changes
     YouTubePlayer player;
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -267,8 +264,8 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
 
                     final int lesson_id = lectures.get(currPosition).getLecture_id();
                     List<SessionManager> sessionManagers = listAll(SessionManager.class);
-                    showDialog();
-                    pDialog.setMessage("Loading...");
+//                    showDialog();
+//                    pDialog.setMessage("Loading...");
 
                     AndroidNetworking.post(Api_Urls.BASE_URL + "api/lessons/" + lesson_id + "/upvote")
                             .addHeaders("Authorization", "Bearer " + sessionManagers.get(0).getToken())

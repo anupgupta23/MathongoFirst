@@ -300,7 +300,7 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
 
                                 JSONObject tutorObj = object.getJSONObject("tutor");
                                 Tutor tutor = new Tutor(tutorObj.getInt("id"),tutorObj.getString("name"),tutorObj.getString("description"));
-
+                                tutor.setImgUrl(tutorObj.getString("img"));
                                 Log.d("lalala",minicourse_name);
                                 Log.d("lalala","inside loop");
 
@@ -314,6 +314,8 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
                             listAdapter.notifyDataSetChanged();
                             hideDialog();
                         } catch (JSONException e) {
+
+
                             new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
                                     .setContentText("There seems a problem with us.\nPlease try again later.")
                                     .setTitleText("Oops..!!")
@@ -449,7 +451,7 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
 
                                 JSONObject tutorObj = object.getJSONObject("tutor");
                                 Tutor tutor = new Tutor(tutorObj.getInt("id"),tutorObj.getString("name"),tutorObj.getString("description"));
-
+                                tutor.setImgUrl(tutorObj.getString("img"));
                                 Log.d("lalala",minicourse_name);
                                 Log.d("lalala","inside loop");
 

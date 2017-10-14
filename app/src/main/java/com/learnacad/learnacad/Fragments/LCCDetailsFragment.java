@@ -19,6 +19,7 @@ import com.learnacad.learnacad.Models.SessionManager;
 import com.learnacad.learnacad.Models.Tutor;
 import com.learnacad.learnacad.Networking.Api_Urls;
 import com.learnacad.learnacad.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +28,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.orm.SugarRecord.listAll;
 
@@ -38,6 +40,7 @@ public class LCCDetailsFragment extends Fragment {
 
     View view;
     private TextView mediumTextView, difficultyTextView, durationTextView, relevanceTextView, teachersNameTextView, teachersDescriptionTextView,classTextView;
+    CircleImageView circleImageView;
     private Minicourse minicourse;
     private Tutor t;
     private ProgressDialog pDialog;
@@ -65,6 +68,7 @@ public class LCCDetailsFragment extends Fragment {
         durationTextView = (TextView) view.findViewById(R.id.lccdetails_courseDetails_durationValueTextView);
         relevanceTextView = (TextView) view.findViewById(R.id.lccdetails_courseDetails_relevanceValueTextView);
         classTextView = (TextView) view.findViewById(R.id.lccdetails_courseDetails_classValueTextView);
+        circleImageView = (CircleImageView) view.findViewById(R.id.lccdetails_teacherInfo_teachersCircleImageView);
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
@@ -136,6 +140,7 @@ public class LCCDetailsFragment extends Fragment {
                             String teachersdescription = tutor.getString("description");
                             int teachersId = tutor.getInt("id");
                             t = new Tutor(teachersId, teacherName, teachersdescription);
+                            t.setImgUrl(tutor.getString("img"));
 
                             hideDialog();
                         } catch (JSONException e) {
@@ -181,6 +186,18 @@ public class LCCDetailsFragment extends Fragment {
         classTextView.setText(minicourse.getClassName());
         teachersNameTextView.setText(t.getName());
         teachersDescriptionTextView.setText(t.getDescription());
+
+
+        if(t.getImgUrl().isEmpty() || t.getImgUrl().length() == 0){
+
+            circleImageView.setImageResource(R.drawable.teachersicon);
+        }else {
+
+            Picasso.with(getActivity())
+                    .load(Api_Urls.BASE_URL + "images/" + t.getImgUrl() + ".jpg")
+                    .error(R.drawable.teachersicon)
+                    .into(circleImageView);
+        }
     }
 
     private void showDialog() {

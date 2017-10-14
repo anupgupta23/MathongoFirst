@@ -1,6 +1,7 @@
 package com.learnacad.learnacad.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -85,11 +86,13 @@ public class LPLectureTabAdapter extends RecyclerView.Adapter<LPLectureTabAdapte
 
             holder.indicator.setVisibility(View.VISIBLE);
             holder.playButton.setVisibility(View.GONE);
+            holder.titleTextView.setTextColor(Color.parseColor("#1589ee"));
             holder.itemView.setClickable(false);
         }else{
 
             holder.indicator.setVisibility(View.GONE);
             holder.playButton.setVisibility(View.VISIBLE);
+            holder.titleTextView.setTextColor(Color.parseColor("#9e9e9e"));
             holder.itemView.setClickable(true);
         }
 

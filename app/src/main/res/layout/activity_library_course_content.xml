@@ -33,6 +33,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/backgroundBlue"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
@@ -48,10 +49,9 @@
             android:layout_height="wrap_content"
             android:background="@color/backgroundBlue"
             app:tabIndicatorColor="@android:color/background_light"
-            app:tabMode="scrollable"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextAppearance="@style/MyCustomText"
-            app:tabTextColor="@color/cardview_light_background" />​​
+            app:tabTextColor="@color/navbarstudentColor" />​​
 
     </android.support.design.widget.AppBarLayout>
 

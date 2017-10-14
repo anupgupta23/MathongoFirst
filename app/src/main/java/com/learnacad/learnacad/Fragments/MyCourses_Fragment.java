@@ -14,6 +14,7 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -50,6 +51,7 @@ public class MyCourses_Fragment extends Fragment {
     ArrayList<Tutor> tutors;
     LibraryCourseListAdapter listAdapter;
     private ProgressDialog pDialog;
+    RelativeLayout emptyStateLayout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -92,8 +94,7 @@ public class MyCourses_Fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
-
-
+       emptyStateLayout = (RelativeLayout) view.findViewById(R.id.mycoursesemptyLayout);
 
         getActivity().setTitle("My Courses");
         fetchData();
@@ -117,18 +118,29 @@ public class MyCourses_Fragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
 
+                        if(response.length() == 0){
 
-                        try {
+                           emptyStateLayout.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
+                            hideDialog();
+                        }else{
+
+                            emptyStateLayout.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                        }
+
+
+
 
                             for(int j = 0; j < response.length(); ++j) {
 
-                                JSONObject outerObject = response.getJSONObject(j);
-                                int id = outerObject.getInt("minicourseId");
+                                try {
+                                    JSONObject outerObject = response.getJSONObject(j);
+                                    int id = outerObject.getInt("minicourseId");
 
-                                if(!map.containsKey(id)) {
+                                    if (!map.containsKey(id)) {
 
-                                    map.put(id,true);
-
+                                        map.put(id, true);
 
 
                                         JSONObject object = outerObject.getJSONObject("minicourse");
@@ -166,22 +178,33 @@ public class MyCourses_Fragment extends Fragment {
 
                                         JSONObject tutorObj = object.getJSONObject("tutor");
                                         Tutor tutor = new Tutor(tutorObj.getInt("id"), tutorObj.getString("name"), tutorObj.getString("description"));
-
-
+                                        String teachersUrl = tutorObj.getString("img");
+                                        tutor.setImgUrl(teachersUrl);
                                         tutors.add(tutor);
 
 
+                                    }
+                                }catch (JSONException e){
+                                            Log.d("jsong","Inside new catch");
+//                                            minicoursesList.remove(minicoursesList.size() - 1);
+//                                            tutors.remove(tutors.size() - 1);
+                                            continue;
 
-                                }
+                                        }
                             }
 
                             listAdapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
-                                    .setContentText("There seems a problem with us.\nPlease try again later.")
-                                    .setTitleText("Oops..!!")
-                                    .show();
-                        }
+//                         catch (JSONException e) {
+//                            new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+//                                    .setContentText("There seems a problem with us.\nPlease try again later.")
+//                                    .setTitleText("Oops..!!")
+//                                    .show();
+//
+//
+//                            Log.d("jsong",e.getMessage());
+//                            Log.d("jsong",e.getLocalizedMessage());
+//    //                        Log.d("jsong",e.printStackTrace());
+//                        }
 
                         hideDialog();
 

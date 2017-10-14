@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:background="@drawable/loginbackground">
+    android:background="@color/backgroundBlue">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewNavigationDrawer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="65dp"
         android:layout_marginRight="5dp"
-        android:src="@drawable/image"
+        android:src="@drawable/avatar"
         android:layout_marginStart="10dp"
         android:layout_above="@+id/textViewNameNavigationDrawer"
         android:layout_alignParentStart="true"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/textViewIdentityNavigationDrawer"
         android:layout_alignStart="@+id/textViewIdentityNavigationDrawer"
-        android:layout_marginBottom="11dp"
+        android:layout_marginBottom="3dp"
         android:text="John Doe"
         android:textColor="@android:color/white"
         android:textSize="16sp"
@@ -38,6 +38,6 @@
         android:layout_alignStart="@+id/imageViewNavigationDrawer"
         android:layout_marginBottom="12dp"
         android:text="Student"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/navbarstudentColor" />
 </RelativeLayout>
 

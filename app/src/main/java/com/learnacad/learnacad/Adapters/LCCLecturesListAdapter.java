@@ -92,6 +92,23 @@ public class LCCLecturesListAdapter extends RecyclerView.Adapter<LCCLecturesList
             @Override
             public void onClick(View view) {
 
+                if(!enrolled){
+
+                    new SweetAlertDialog(mContext,SweetAlertDialog.ERROR_TYPE)
+                            .setContentText("Please Enroll to view the lectures")
+                            .setTitleText("Oops...")
+                            .show();
+                }else {
+
+//                mContext.startActivity(new Intent(mContext, LecturePlayerActivity.class));
+                    Intent intent = new Intent(mContext, LecturePlayerActivity.class);
+                    intent.putExtra("selectedLecture", lessons.get(position));
+                    intent.putExtra("selectedPosition", position);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    intent.putExtra("lectureList", lessons);
+                    mContext.startActivity(intent);
+                }
+
             }
         });
 

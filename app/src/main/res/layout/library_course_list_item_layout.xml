@@ -2,8 +2,8 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:elevation="10dp"
-    android:layout_margin="15dp"
+    app:elevation="4dp"
+    android:layout_margin="10dp"
     android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -22,6 +22,7 @@
             android:id="@+id/LibraryCourseItemTitle"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:text="@string/sampleTitle"
             android:textColor="@android:color/background_dark"
             android:textSize="16sp"
@@ -39,14 +40,14 @@
 -->
 
 
-        <RatingBar
+        <android.support.v7.widget.AppCompatRatingBar
             android:id="@+id/LibraryCourseItemRatingbar"
-            style="?android:attr/ratingBarStyleSmall"
+            style="@style/RatingBarCustom"
             android:layout_width="80dp"
             android:layout_height="20dp"
             android:layout_below="@+id/LibraryCourseItemTitle"
+            android:layout_marginBottom="5dp"
             android:numStars="5"
-            android:progressTint="@color/Ratingbar"
             android:rating="3.5"
             android:stepSize="0.5" />
 
@@ -67,6 +68,7 @@
             android:id="@+id/LibraryCourseItemDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/LibraryCourseItemRatingbar"
             android:text="@string/sampledesc"
@@ -74,23 +76,24 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/LibraryCourseItemCircleImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
             android:layout_below="@id/LibraryCourseItemDescription"
-            android:layout_margin="10dp"
-            android:src="@drawable/image" />
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/teachersicon" />
 
         <TextView
             android:id="@+id/LibraryCourseItemTeacherNameTextView"
             android:layout_width="100dp"
             android:layout_height="35dp"
+            android:layout_marginTop="3dp"
             android:layout_alignTop="@+id/LibraryCourseItemCircleImageView"
-            android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/LibraryCourseItemCircleImageView"
             android:gravity="center_vertical"
             android:text="John Doe"
-            android:textColor="@color/colorGray"
+            android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="bold" />
 

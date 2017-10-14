@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -44,6 +45,7 @@ public class Bookmarks_Fragment extends Fragment {
     BookmarksListAdapter adapter;
     ArrayList<Lecture> fetchedBookmarks;
     private ProgressDialog pDialog;
+    RelativeLayout emptyStateLayout;
 
 
     @Override
@@ -56,7 +58,7 @@ public class Bookmarks_Fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
-
+        emptyStateLayout = (RelativeLayout) v.findViewById(R.id.emptystate_layout);
 
         if(!isConnected()){
 
@@ -95,6 +97,17 @@ public class Bookmarks_Fragment extends Fragment {
 
                         Log.d("123456",response.length() + " ");
 
+                        if(response.length() == 0){
+
+                            emptyStateLayout.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
+                            hideDialog();
+                        }else{
+
+                            emptyStateLayout.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                        }
+
                         for(int i = 0; i < response.length(); ++i){
 
                             try {
@@ -115,11 +128,11 @@ public class Bookmarks_Fragment extends Fragment {
                                 fetchedBookmarks.add(l);
 
                             } catch (JSONException e) {
-                                new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
-                                        .setContentText("There seems a problem with us.\nPlease try again later.")
-                                        .setTitleText("Oops..!!")
-                                        .show();
-                                hideDialog();
+//                                new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+//                                        .setContentText("There seems a problem with us.\nPlease try again later.")
+//                                        .setTitleText("Oops..!!")
+//                                        .show();
+                                continue;
                             }
 
                         }
