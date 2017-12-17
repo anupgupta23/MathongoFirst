@@ -1,0 +1,144 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        layout="@layout/reviews_empty_state_layout"
+        android:id="@+id/empty_reviews_state_layoutInclusion"/>
+
+    <include layout="@layout/progressbar_layout" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nested">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp">
+
+        <TextView
+            android:id="@+id/ratingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ratings"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingsCardView"
+            android:layout_below="@+id/ratingTextView"
+            android:layout_marginTop="10dp"
+            app:elevation="10dp"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lccratings_card_ratingValue_TextView"
+                    android:layout_width="85dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.98"
+                    android:gravity="center"
+                    android:text="4.5"
+                    android:textColor="@color/black"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+
+                <android.support.v7.widget.AppCompatRatingBar
+                    style="@style/RatingBarCustom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.56"
+                    android:id="@+id/lccratings_card_ratingBar"
+                    android:numStars="5"
+                    android:layout_margin="5dp"
+                    android:progressBackgroundTint="@color/Ratingbar"
+                    android:progressTint="@color/Ratingbar"
+                    android:rating="3.5"
+                    android:stepSize="0.5" />
+
+                <TextView
+                    android:id="@+id/lccratings_card_numofRatingsValue_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="223 Ratings" />
+
+                <Button
+                    android:id="@+id/lccratings_card_rateandreviewButton"
+                    android:layout_width="147dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.61"
+                    android:background="@drawable/button_shape"
+                    android:text="Enroll to Review"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/reviewsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reviews"
+            android:layout_below="@+id/ratingsCardView"
+            android:textColor="@color/black"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingStart="15dp"
+            android:id="@+id/belowNestedScrllLL"
+            android:paddingEnd="15dp"
+            android:layout_below="@+id/nested">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/reviewsListView"
+            android:scrollbars="vertical" />
+
+        </LinearLayout>
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/reviewsRecyclerView"-->
+            <!--android:scrollbars="vertical"-->
+            <!--android:layout_below="@+id/reviewsTextView"/>-->
+
+
+
+
+</RelativeLayout>

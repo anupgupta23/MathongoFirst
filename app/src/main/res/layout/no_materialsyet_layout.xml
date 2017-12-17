@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:src="@drawable/materialsempty"
+        android:layout_marginTop="127dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

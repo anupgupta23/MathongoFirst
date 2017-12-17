@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "861281119123",
+    "firebase_url": "https://learnacad-1d335.firebaseio.com",
+    "project_id": "learnacad-1d335",
+    "storage_bucket": "learnacad-1d335.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861281119123:android:25922e65465651c5",
+        "android_client_info": {
+          "package_name": "com.learnacad.learnacad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "861281119123-4oja2f9p8kjq10ofiad3qe6qh42hp3hu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.learnacad.learnacad",
+            "certificate_hash": "c7d70f805ca8fc1382e2d04720d6fb5957bd88b9"
+          }
+        },
+        {
+          "client_id": "861281119123-pb6msb9n8e75sr1ridppquuejsn7jnh3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJTUUizqZ3vMhwIusyjebq87MU4oSbLfo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "861281119123-pb6msb9n8e75sr1ridppquuejsn7jnh3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

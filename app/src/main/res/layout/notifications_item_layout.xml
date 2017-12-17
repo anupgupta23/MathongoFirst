@@ -1,0 +1,61 @@
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    app:cardElevation="5dp"
+    android:layout_margin="10dp"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/relativeLayout_background"
+            android:background="@color/colorGreenButton"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clear"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="15dp"
+            android:background="@color/white"
+            android:id="@+id/relativeLayout_Foreground"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification Title"
+                android:id="@+id/notificationsItemTitleTextView"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/notificationsItemDescriptionTextView"
+                android:text="@string/sampledesc"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/notificationsItemTitleTextView"/>
+
+        </RelativeLayout>
+        
+
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

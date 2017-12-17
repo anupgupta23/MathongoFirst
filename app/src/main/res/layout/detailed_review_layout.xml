@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="15dp"
+    android:background="@color/backgroundBlue"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/detailedReviewLayoutNameofStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:elevation="0dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+    <RatingBar
+        android:id="@+id/ratingBardetailedReviewLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:progressTint="@color/Ratingbar"
+        android:rating="0"
+        android:stepSize="0.5"
+        style="@style/RatingBarCustom"
+        android:layout_below="@+id/detailedReviewLayoutNameofStudent"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/TextViewReviewDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ratingBardetailedReviewLayout"
+        android:layout_marginTop="12dp"
+        android:gravity="top"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textColorLink="@android:color/transparent" />
+
+
+
+    <ImageButton
+        android:id="@+id/imageButtonReviewDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/closeicon" />
+
+
+
+</RelativeLayout>
