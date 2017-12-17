@@ -1,6 +1,5 @@
 package com.learnacad.learnacad.Fragments;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -13,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.androidnetworking.AndroidNetworking;
@@ -44,8 +44,8 @@ public class Bookmarks_Fragment extends Fragment {
     RecyclerView recyclerView;
     BookmarksListAdapter adapter;
     ArrayList<Lecture> fetchedBookmarks;
-    private ProgressDialog pDialog;
     RelativeLayout emptyStateLayout;
+    ProgressBar progressBar;
 
 
     @Override
@@ -56,9 +56,10 @@ public class Bookmarks_Fragment extends Fragment {
         adapter = new BookmarksListAdapter(getActivity(),fetchedBookmarks);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        pDialog = new ProgressDialog(getActivity());
-        pDialog.setCancelable(false);
         emptyStateLayout = (RelativeLayout) v.findViewById(R.id.emptystate_layout);
+
+        progressBar = v.findViewById(R.id.pb);
+        progressBar.setIndeterminate(true);
 
         if(!isConnected()){
 
@@ -66,7 +67,6 @@ public class Bookmarks_Fragment extends Fragment {
                     .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
                     .setTitleText("Oops..!!")
                     .show();
-
         }
 
         getActivity().setTitle("My Bookmarks");
@@ -75,14 +75,23 @@ public class Bookmarks_Fragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        emptyStateLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        emptyStateLayout.setVisibility(View.GONE);
+    }
+
     public void fetchTitles() {
 
         final List<SessionManager> session = listAll(SessionManager.class);
+        progressBar.setVisibility(View.VISIBLE);
 
-        showDialog();
-        pDialog.setMessage("Loading...");
-
-        Log.d("bookmarks","Bearer "+session.get(0).getToken());
 
         AndroidNetworking.get(Api_Urls.BASE_URL + "api/students/bookmarks")
                 .addHeaders("Authorization", "Bearer " + session.get(0).getToken())
@@ -93,15 +102,11 @@ public class Bookmarks_Fragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        Log.d("123456",response.toString());
-
-                        Log.d("123456",response.length() + " ");
 
                         if(response.length() == 0){
 
                             emptyStateLayout.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
-                            hideDialog();
                         }else{
 
                             emptyStateLayout.setVisibility(View.GONE);
@@ -137,7 +142,7 @@ public class Bookmarks_Fragment extends Fragment {
 
                         }
 
-                        hideDialog();
+                        progressBar.setVisibility(View.GONE);
 
                         adapter.notifyDataSetChanged();
                     }
@@ -151,26 +156,10 @@ public class Bookmarks_Fragment extends Fragment {
                                 .show();
 
 
-                        hideDialog();
+                        progressBar.setVisibility(View.GONE);
+
                     }
                 });
-
-    }
-
-
-    private void showDialog() {
-
-        if (!pDialog.isShowing()) {
-            pDialog.show();
-        }
-
-    }
-
-    private void hideDialog() {
-
-        if (pDialog.isShowing()) {
-            pDialog.dismiss();
-        }
 
     }
 

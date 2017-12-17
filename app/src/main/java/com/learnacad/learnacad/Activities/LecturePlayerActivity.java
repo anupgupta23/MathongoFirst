@@ -1,6 +1,5 @@
 package com.learnacad.learnacad.Activities;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
@@ -57,7 +57,7 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
     Button upVoteButton;
     Button bookmarkButton;
     int currPosition;
-    ProgressDialog pDialog;
+    ProgressBar progressBar;
     ArrayList<Lecture> lectures;
     static TextView aTitletextView,aDescptextView,teachersNametextView,teachersDesctextView,adurationTextView;
     private String[] tabTitles = {"LECTURES", "COMMENTS","DOUBTS"};
@@ -66,8 +66,8 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecture);
-        pDialog = new ProgressDialog(this);
-        pDialog.setCancelable(false);
+        progressBar = findViewById(R.id.pb);
+        progressBar.setIndeterminate(true);
 
 
         if(!isConnected()){
@@ -174,10 +174,9 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
 
                             final int lesson_id = lectures.get(currPosition).getLecture_id();
                             List<SessionManager> sessionManagers = listAll(SessionManager.class);
-                            showDialog();
-                            pDialog.setMessage("Loading...");
+                        progressBar.setVisibility(View.VISIBLE);
 
-                            String reportError = errorEditText.toString().trim();
+                        String reportError = errorEditText.toString().trim();
 
                             if(reportError.isEmpty()) {
 
@@ -207,7 +206,7 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                                             .show();
                                                 }
 
-                                                hideDialog();
+                                                progressBar.setVisibility(View.GONE);
                                             }
 
                                             @Override
@@ -216,7 +215,7 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                                         .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
                                                         .setTitleText("Oops..!!")
                                                         .show();
-                                                hideDialog();
+                                                progressBar.setVisibility(View.GONE);
                                             }
                                         });
                             }else{
@@ -227,8 +226,9 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                         .setTitleText("Oops...")
                                         .show();
 
-                                hideDialog();
+                                progressBar.setVisibility(View.GONE);
                             }
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
 
@@ -293,7 +293,7 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                                 .show();
                                     }
 
-                                    hideDialog();
+
                                 }
 
                                 @Override
@@ -302,7 +302,6 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                             .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
                                             .setTitleText("Oops..!!")
                                             .show();
-                                    hideDialog();
                                 }
                             });
                 }
@@ -317,8 +316,7 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
 
                     final int lesson_id = lectures.get(currPosition).getLecture_id();
                     List<SessionManager> sessionManagers = listAll(SessionManager.class);
-                    showDialog();
-                    pDialog.setMessage("Loading...");
+                    progressBar.setVisibility(View.VISIBLE);
 
                     AndroidNetworking.post(Api_Urls.BASE_URL + "api/lessons/" + lesson_id + "/bookmark")
                             .addHeaders("Authorization", "Bearer " + sessionManagers.get(0).getToken())
@@ -344,7 +342,8 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                                 .show();
                                     }
 
-                                    hideDialog();
+                                    progressBar.setVisibility(View.GONE);
+
                                 }
 
                                 @Override
@@ -353,12 +352,15 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                             .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
                                             .setTitleText("Oops..!!")
                                             .show();
-                                    hideDialog();
+                                    progressBar.setVisibility(View.GONE);
+
                                 }
                             });
                 }
             }
         });
+
+
 //        shareButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -443,8 +445,6 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
 
         int lesson_id = lectures.get(postion).getLecture_id();
         List<SessionManager> sessionManagers = listAll(SessionManager.class);
-        showDialog();
-        pDialog.setMessage("Loading...");
 
         AndroidNetworking.get(Api_Urls.BASE_URL + "api/lessons/" + lesson_id + "/isBookmarked")
                 .addHeaders("Authorization","Bearer " + sessionManagers.get(0).getToken())
@@ -452,8 +452,6 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-
-                        Log.d("tinaktin",response.toString());
 
                         try {
                             String success = response.getString("isBookmarked");
@@ -471,7 +469,7 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                     .show();
                         }
 
-                        hideDialog();
+
                     }
 
                     @Override
@@ -480,7 +478,6 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                 .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
                                 .setTitleText("Oops..!!")
                                 .show();
-                        hideDialog();
                     }
                 });
     }
@@ -533,8 +530,6 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
 
         int lesson_id = lectures.get(pos).getLecture_id();
         List<SessionManager> sessionManagers = listAll(SessionManager.class);
-        showDialog();
-        pDialog.setMessage("Loading...");
 
         AndroidNetworking.get(Api_Urls.BASE_URL + "api/lessons/" + lesson_id + "/isUpvoted")
                 .addHeaders("Authorization","Bearer " + sessionManagers.get(0).getToken())
@@ -562,7 +557,6 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                     .show();
                         }
 
-                        hideDialog();
                     }
 
                     @Override
@@ -571,25 +565,8 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
                                 .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
                                 .setTitleText("Oops..!!")
                                 .show();
-                        hideDialog();
                     }
                 });
     }
 
-
-    private void showDialog() {
-
-        if (!pDialog.isShowing()) {
-            pDialog.show();
-        }
-
-    }
-
-    private void hideDialog() {
-
-        if (pDialog.isShowing()) {
-            pDialog.dismiss();
-        }
-
-    }
 }

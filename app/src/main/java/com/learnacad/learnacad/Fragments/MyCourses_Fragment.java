@@ -1,6 +1,5 @@
 package com.learnacad.learnacad.Fragments;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,6 +13,7 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.androidnetworking.AndroidNetworking;
@@ -50,7 +50,7 @@ public class MyCourses_Fragment extends Fragment {
     ArrayList<Minicourse> minicoursesList;
     ArrayList<Tutor> tutors;
     LibraryCourseListAdapter listAdapter;
-    private ProgressDialog pDialog;
+    ProgressBar progressBar;
     RelativeLayout emptyStateLayout;
     @Nullable
     @Override
@@ -92,21 +92,19 @@ public class MyCourses_Fragment extends Fragment {
         listAdapter = new LibraryCourseListAdapter(getActivity(),minicoursesList,null,tutors);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        pDialog = new ProgressDialog(getActivity());
-        pDialog.setCancelable(false);
+        progressBar = view.findViewById(R.id.pb);
+        progressBar.setIndeterminate(true);;
        emptyStateLayout = (RelativeLayout) view.findViewById(R.id.mycoursesemptyLayout);
 
         getActivity().setTitle("My Courses");
         fetchData();
         return view;
-//        return inflater.inflate(R.layout.mycourses_home_layout,container,false);
-
     }
 
     private void fetchData() {
 
-        pDialog.setMessage("Loading...");
-        showDialog();
+
+        progressBar.setVisibility(View.VISIBLE);
 
         final HashMap<Integer,Boolean> map = new HashMap<>();
 
@@ -122,7 +120,7 @@ public class MyCourses_Fragment extends Fragment {
 
                            emptyStateLayout.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
-                            hideDialog();
+                            progressBar.setVisibility(View.GONE);
                         }else{
 
                             emptyStateLayout.setVisibility(View.GONE);
@@ -170,11 +168,9 @@ public class MyCourses_Fragment extends Fragment {
 
                                         }
 
-                                        Log.d("checkCat", builder.toString());
-
                                         minicourse.setEnrolled(false);
                                         minicourse.setRelevance(builder.toString());
-                                        minicoursesList.add(minicourse);
+
 
                                         JSONObject tutorObj = object.getJSONObject("tutor");
                                         Tutor tutor = new Tutor(tutorObj.getInt("id"), tutorObj.getString("name"), tutorObj.getString("description"));
@@ -182,31 +178,22 @@ public class MyCourses_Fragment extends Fragment {
                                         tutor.setImgUrl(teachersUrl);
                                         tutors.add(tutor);
 
+                                        minicourse.setTutorImageUrl(tutor.getImgUrl());
+                                        minicourse.setTutorName(tutor.getName());
+
+                                        minicoursesList.add(minicourse);
+
 
                                     }
                                 }catch (JSONException e){
-                                            Log.d("jsong","Inside new catch");
-//                                            minicoursesList.remove(minicoursesList.size() - 1);
-//                                            tutors.remove(tutors.size() - 1);
                                             continue;
-
-                                        }
+                                }
                             }
 
                             listAdapter.notifyDataSetChanged();
-//                         catch (JSONException e) {
-//                            new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
-//                                    .setContentText("There seems a problem with us.\nPlease try again later.")
-//                                    .setTitleText("Oops..!!")
-//                                    .show();
-//
-//
-//                            Log.d("jsong",e.getMessage());
-//                            Log.d("jsong",e.getLocalizedMessage());
-//    //                        Log.d("jsong",e.printStackTrace());
-//                        }
 
-                        hideDialog();
+
+                        progressBar.setVisibility(View.GONE);
 
 
                     }
@@ -218,6 +205,8 @@ public class MyCourses_Fragment extends Fragment {
                                 .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
                                 .setTitleText("Oops..!!")
                                 .show();
+                        progressBar.setVisibility(View.GONE);
+
                     }
                 });
 
@@ -227,21 +216,6 @@ public class MyCourses_Fragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    }
-
-    private void showDialog(){
-
-        if(!pDialog.isShowing()){
-            pDialog.show();
-        }
-
-    }
-
-    private void hideDialog(){
-
-        if(pDialog.isShowing()){
-            pDialog.dismiss();
-        }
     }
 
     public boolean isConnected(){

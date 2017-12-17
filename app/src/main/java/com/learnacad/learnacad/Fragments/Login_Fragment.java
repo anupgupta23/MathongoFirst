@@ -183,7 +183,6 @@ public class Login_Fragment extends Fragment {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("lalala", String.valueOf(response));
                         try {
                             String result = response.getString("success");
                             if(result.contentEquals("true")){
@@ -209,7 +208,6 @@ public class Login_Fragment extends Fragment {
 
                                 snackbar.dismiss();
 
-                                Log.d("snack","inside else " + message);
                                 Snackbar snackbar1 = Snackbar.make(rootview,message  + ".Please try again.",Snackbar.LENGTH_LONG);
                                 View view = snackbar1.getView();
                                 TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
@@ -217,14 +215,6 @@ public class Login_Fragment extends Fragment {
                                 view.setPadding(0,0,0,0);
                                 textView.setCompoundDrawablePadding(8);
                                 snackbar1.show();
-//                                snackbar.show();
-//                                Toast.makeText(getContext(), message , Toast.LENGTH_SHORT).show();
-//                                SweetAlertDialog dialog = new SweetAlertDialog(getActivity(),SweetAlertDialog.SUCCESS_TYPE)
-//                                        .setContentText("Happy Learning");
-//
-//                                dialog.show();
-//
-//                                dialog.findViewById(R.id.confirm_button).setVisibility(View.GONE);
 
 
                             }
@@ -240,6 +230,10 @@ public class Login_Fragment extends Fragment {
 
                     @Override
                     public void onError(ANError anError) {
+
+                        Log.d("libraryerror",anError.getLocalizedMessage());
+                        Log.d("libraryerror",anError.getErrorCode() + " ");
+
 
                         new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
                                 .setContentText("There seems a problem with your internet connection.\nPlease try again later.")

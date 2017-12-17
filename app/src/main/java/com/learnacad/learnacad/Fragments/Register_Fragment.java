@@ -128,12 +128,15 @@ public class Register_Fragment extends Fragment {
                 ((TextView)view).setTextColor(Color.WHITE);
                 classChosen = adapterView.getItemAtPosition(i).toString();
 
-               // Toast.makeText(getActivity(), classSelected , Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(classChosen)){
+                    classChosen = "Class";
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+                classChosen = "Class";
             }
         });
 
@@ -224,7 +227,7 @@ public class Register_Fragment extends Fragment {
 
                 if(classChosen.contentEquals("Class")){
 
-                    Snackbar snackbar1 = Snackbar.make(view,"Choose a class",Snackbar.LENGTH_LONG);
+                    Snackbar snackbar1 = Snackbar.make(view,"Please select a class.",Snackbar.LENGTH_LONG);
                     View view1 = snackbar1.getView();
                     TextView textView = (TextView) view1.findViewById(android.support.design.R.id.snackbar_text);
                     view1.setPadding(0,0,0,0);
@@ -340,9 +343,7 @@ public class Register_Fragment extends Fragment {
 
     void replaceFragment(){
 
-
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        // fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.fade_out);
         fragmentTransaction.setCustomAnimations(R.anim.enter,R.anim.exit);
         fragmentTransaction.replace(R.id.content_login_frame,new Login_Fragment());
         fragmentTransaction.commit();

@@ -1,6 +1,6 @@
 package com.learnacad.learnacad.Fragments;
 
-import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -14,6 +14,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.InflateException;
@@ -23,8 +24,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -40,6 +42,7 @@ import com.learnacad.learnacad.Models.SessionManager;
 import com.learnacad.learnacad.Models.Tutor;
 import com.learnacad.learnacad.Networking.Api_Urls;
 import com.learnacad.learnacad.R;
+import com.orm.SugarRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +53,7 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static com.orm.SugarRecord.deleteAll;
 import static com.orm.SugarRecord.listAll;
 
 /**
@@ -60,7 +64,6 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
 
     RecyclerView recyclerView;
     LibraryCourseListAdapter listAdapter;
-    RelativeLayout relativeLayout;
     ChipsViewAdapeter chipsViewAdapeter;
     ArrayList<Minicourse> minicoursesList;
     ArrayList<Tutor> tutors;
@@ -71,24 +74,20 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
     RecyclerView chipRecyclerView;
     Filter f;
     Bundle b;
+    SearchView searchView;
     FiltersViewModel mViewModel;
-
-    boolean ans;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ProgressDialog pDialog;
+    private ProgressBar progressBar;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        Log.d("lolo","onCreateView LibraryCourseListFragment");
 
         if(view != null){
 
             ViewGroup parent = (ViewGroup) view.getParent();
             if(parent != null){
-
-                Log.d("lolo","Inside  if(parent != null) ");
 
                 parent.removeAllViews();
             }
@@ -97,12 +96,8 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
 
         try {
 
-            Log.d("lolo","Inside TRY ");
-
             view = inflater.inflate(R.layout.courses_list_library_fragment_layout,container,false);
         }catch (InflateException e){
-
-            Log.d("lolo","Inside CATCH ");
 
         }
 
@@ -113,12 +108,14 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
         minicoursesList = new ArrayList<>();
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         tutors = new ArrayList<>();
-//        relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         listAdapter = new LibraryCourseListAdapter(getActivity(),minicoursesList,swipeRefreshLayout,tutors);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        pDialog = new ProgressDialog(getActivity());
-        pDialog.setCancelable(false);
+
+        progressBar = view.findViewById(R.id.pb);
+        progressBar.setIndeterminate(true);
+        progressBar.setProgress(0);
+
         getActivity().setTitle("Library");
         BaseActivity.getMyCourses();
 
@@ -135,6 +132,13 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
         chipRecyclerView.setLayoutManager(layoutManager);
 
+
+        if(!isConnected()){
+
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_frame,new NoInternetConnectionFragment());
+            fragmentTransaction.commit();
+        }
 
         chipsCardView.setVisibility(View.GONE);
 
@@ -153,20 +157,13 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
 
             final ArrayList<String> checkedItems = b.getStringArrayList("checkedItems");
 
-            Filter filter = (Filter) b.getSerializable("filterObject");
-
             fetchDataWithFilters(checkedItems);
-
-
-
-        //    ChipView chipView = (ChipView) filterLayout.findViewById(R.id.chipView);
 
             if(checkedItems != null && checkedItems.size() > 0) {
 
                 chipsTitles.clear();
                 chipsTitles.addAll(checkedItems);
                 chipsViewAdapeter.notifyDataSetChanged();
-                Log.d("uiui","chipTitles " + chipsTitles.size());
                 chipsCardView.setVisibility(View.VISIBLE);
 
             }
@@ -174,8 +171,6 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
         }else{
 
             fetchData();
-
-          //  fetchDataWithFilters();
         }
     }
 
@@ -184,6 +179,30 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_library,menu);
+
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                listAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                listAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -202,8 +221,21 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
 
         }
 
+        if(item.getItemId() == R.id.action_search){
+
+            return true;
+
+       }
+
+//        if(item.getItemId() == R.id.NotificationsIII){
+//
+//            startActivity(new Intent(getActivity(), NotificationsActivity.class));
+//        }
+
         return true;
     }
+
+
 
 
 
@@ -236,11 +268,13 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
 
     private void fetchData() {
 
-        pDialog.setMessage("Loading...");
-        showDialog();
         minicoursesList.clear();
         tutors.clear();
         mViewModel.clearall();
+        deleteAll(Minicourse.class);
+        deleteAll(Tutor.class);
+
+        progressBar.setVisibility(View.VISIBLE);
 
         List<SessionManager> session = listAll(SessionManager.class);
         AndroidNetworking.get(Api_Urls.BASE_URL + "api/minicourses")
@@ -250,21 +284,11 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        Log.d("lalala", String.valueOf(response));
-
                         try {
 
-
-
-                            Log.d("looo", String.valueOf(response.length()));
-
-                            for(int i = 0; i < response.length(); ++i){
+                            for(int i = response.length() - 1; i >= 0; --i){
 
                                 JSONObject object = response.getJSONObject(i);
-
-                                Log.d("toing",object.toString());
-
-
 
                                 int minicourse_id = object.getInt("id");
                                 String minicourse_name = object.getString("name");
@@ -292,27 +316,25 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
 
                                 }
 
-                                Log.d("checkCat",builder.toString());
-
                                 minicourse.setEnrolled(false);
                                 minicourse.setRelevance(builder.toString());
-                                minicoursesList.add(minicourse);
 
                                 JSONObject tutorObj = object.getJSONObject("tutor");
                                 Tutor tutor = new Tutor(tutorObj.getInt("id"),tutorObj.getString("name"),tutorObj.getString("description"));
                                 tutor.setImgUrl(tutorObj.getString("img"));
-                                Log.d("lalala",minicourse_name);
-                                Log.d("lalala","inside loop");
-
-
                                 tutors.add(tutor);
 
+                                minicourse.setTutorName(tutor.getName());
+                                minicourse.setTutorImageUrl(tutor.getImgUrl());
+                                minicoursesList.add(minicourse);
 
 
                             }
 
                             listAdapter.notifyDataSetChanged();
-                            hideDialog();
+                            progressBar.setVisibility(View.GONE);
+                            checkForSql();
+
                         } catch (JSONException e) {
 
 
@@ -322,50 +344,47 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
                                     .show();
                         }
 
-                           hideDialog();
-
+                        progressBar.setVisibility(View.GONE);
 
                     }
 
                     @Override
                     public void onError(ANError anError) {
 
+
                         new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
                                 .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
                                 .setTitleText("Oops..!!")
                                 .show();
-
-                        hideDialog();
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
 
 
         }
 
-
-    private void showDialog(){
-
-        if(!pDialog.isShowing()){
-            pDialog.show();
-        }
+    private void checkForSql() {
+//
+//        List<Minicourse> list = SugarRecord.findWithQuery(Minicourse.class,"Select * from Minicourse where description LIKE '%question%'");
+//
+//        Log.d("sqlcheckto", String.valueOf(list.size()));
+//
+//        if(list.size() > 0){
+//
+//            for (Minicourse m: list) {
+//                Log.d("sqlcheckto", m.getName());
+//
+//            }
+//        }
 
     }
-
-    private void hideDialog(){
-
-        if(pDialog.isShowing()){
-            pDialog.dismiss();
-        }
-    }
-
-
 
 
     private void fetchDataWithFilters(final ArrayList<String> checkedItems) {
 
 
-        pDialog.setMessage("Loading...");
-        showDialog();
+        progressBar.setVisibility(View.VISIBLE);
+
 
         minicoursesList.clear();
         tutors.clear();
@@ -391,13 +410,7 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        Log.d("lalala", String.valueOf(response));
-
                         try {
-
-
-
-                            Log.d("looo", String.valueOf(response.length()));
 
                             if(response.length() == 0){
 
@@ -409,7 +422,7 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentTransaction.commit();
                             }
-                            for(int i = 0; i < response.length(); ++i){
+                            for(int i = response.length() - 1; i >= 0; --i){
 
                                 JSONObject object = response.getJSONObject(i);
 
@@ -443,27 +456,27 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
 
                                 }
 
-                                Log.d("checkCat",builder.toString());
-
                                 minicourse.setEnrolled(false);
                                 minicourse.setRelevance(builder.toString());
-                                minicoursesList.add(minicourse);
 
                                 JSONObject tutorObj = object.getJSONObject("tutor");
                                 Tutor tutor = new Tutor(tutorObj.getInt("id"),tutorObj.getString("name"),tutorObj.getString("description"));
                                 tutor.setImgUrl(tutorObj.getString("img"));
-                                Log.d("lalala",minicourse_name);
-                                Log.d("lalala","inside loop");
-
 
                                 tutors.add(tutor);
+
+                                minicourse.setTutorName(tutor.getName());
+                                minicourse.setTutorImageUrl(tutor.getImgUrl());
+                                minicoursesList.add(minicourse);
 
 
 
                             }
 
                             listAdapter.notifyDataSetChanged();
-                            hideDialog();
+
+                            progressBar.setVisibility(View.GONE);
+
                         } catch (JSONException e) {
                             new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
                                     .setContentText("There seems a problem with us.\nPlease try again later.")
@@ -471,7 +484,8 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
                                     .show();
                         }
 
-                        hideDialog();
+
+                        progressBar.setVisibility(View.GONE);
 
 
                     }
@@ -484,7 +498,8 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
                                 .setTitleText("Oops..!!")
                                 .show();
 
-                        hideDialog();
+                        progressBar.setVisibility(View.GONE);
+
                     }
                 });
     }
@@ -578,7 +593,6 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
         if(index >= 0) {
                 filterString.deleteCharAt(index);
             }
-            Log.d("ioioio",filterString.toString());
 
         return filterString.toString();
     }
@@ -606,4 +620,14 @@ public class LibraryCourseListFragment extends Fragment implements ChipsViewAdap
         return (activeNetwork != null && (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI || activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE));
 
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        deleteAll(Tutor.class);
+        Log.d("sqlcheckto", "on Destroy View called");
+        deleteAll(Minicourse.class);
+    }
+
+
 }

@@ -15,4 +15,6 @@
         android:visibility="gone"
         android:layout_centerHorizontal="true" />
 
+    <include layout="@layout/progressbar_layout" />
+
 </RelativeLayout>

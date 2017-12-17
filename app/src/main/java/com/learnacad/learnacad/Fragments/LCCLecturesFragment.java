@@ -1,16 +1,15 @@
 package com.learnacad.learnacad.Fragments;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -44,7 +43,7 @@ public class LCCLecturesFragment extends Fragment {
     private RecyclerView recyclerView;
     private LCCLecturesListAdapter lccLecturesListAdapter;
     ArrayList<Lecture> lectures;
-    private ProgressDialog pDialog;
+    ProgressBar progressBar;
     boolean isEnrolled;
     MyCoursesEnrolled coursesEnrolled;
     int course_id;
@@ -59,40 +58,33 @@ public class LCCLecturesFragment extends Fragment {
         course_id = getActivity().getIntent().getIntExtra("MINICOURSE_ID", 0);
         t = new Tutor();
         isEnrolled = checkEnrolled();
-        Log.d("789456123","OnCreateView of LCCLecturesFragment called");
         lccLecturesListAdapter = new LCCLecturesListAdapter(getActivity(), lectures, t,isEnrolled, (CoordinatorLayout) getActivity().findViewById(R.id.cordinatorLayout_library_course_content));
         recyclerView.setAdapter(lccLecturesListAdapter);
-        pDialog = new ProgressDialog(getActivity());
-        pDialog.setCancelable(false);
+        progressBar = view.findViewById(R.id.pb);
+        progressBar.setIndeterminate(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         fetchData();
 
         return view;
     }
-//
-//    public void recreateFragment(){
-//
-//        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//        fragmentTransaction.detach(this).attach(this).commit();
-//
-//    }
-
-
 
 
     private boolean checkEnrolled() {
 
         List<MyCoursesEnrolled> enrolledList = listAll(MyCoursesEnrolled.class);
-        //  ArrayList<Integer> enrolledCourses = new ArrayList<>();
-        //   enrolledCourses.addAll(enrolledList.get(0).getMycourses());
 
-        String toParseCoursesString = enrolledList.get(enrolledList.size() - 1).getMycourses();
+        String toParseCoursesString = "[]";
+
+        if(enrolledList != null && enrolledList.size() > 0){
+
+            toParseCoursesString = enrolledList.get(enrolledList.size() - 1).getMycourses();
+
+        }
         try {
             JSONArray array= new JSONArray(toParseCoursesString);
             for(int i = 0; i < array.length(); ++i){
 
                 int id = array.getInt(i);
-                Log.d("tototo",id + " fetched id " + course_id);
                 if(id == course_id){
 
                     return true;
@@ -113,8 +105,7 @@ public class LCCLecturesFragment extends Fragment {
 
     private void fetchData() {
 
-        pDialog.setMessage("Loading...");
-        showDialog();
+        progressBar.setVisibility(View.VISIBLE);
 
         List<SessionManager> session = listAll(SessionManager.class);
         AndroidNetworking.get(Api_Urls.BASE_URL + "api/minicourses/" + course_id)
@@ -152,16 +143,17 @@ public class LCCLecturesFragment extends Fragment {
                             if(isEnrolled){
 
                                 lccLecturesListAdapter.isEnrolledChanged();
-                                Log.d("789456123","inside if isEnrolled lcclecturesFragment = " + isEnrolled);
                             }
                             lccLecturesListAdapter.notifyDataSetChanged();
-                            hideDialog();
+                            progressBar.setVisibility(View.GONE);
+
                         } catch (JSONException e) {
                             new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
                                     .setContentText("There seems a problem with us.\nPlease try again later.")
                                     .setTitleText("Oops..!!")
                                     .show();
-                            hideDialog();
+                            progressBar.setVisibility(View.GONE);
+
                         }
 
                     }
@@ -172,29 +164,10 @@ public class LCCLecturesFragment extends Fragment {
                                 .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
                                 .setTitleText("Oops..!!")
                                 .show();
-                        hideDialog();
+                        progressBar.setVisibility(View.GONE);
+
 
                     }
                 });
-
-
     }
-
-
-    private void showDialog() {
-
-        if (!pDialog.isShowing()) {
-            pDialog.show();
-        }
-
-    }
-
-    private void hideDialog() {
-
-        if (pDialog.isShowing()) {
-            pDialog.dismiss();
-        }
-
-    }
-
 }

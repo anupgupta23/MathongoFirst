@@ -1,9 +1,13 @@
 package com.learnacad.learnacad.Activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,10 +15,13 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.androidnetworking.AndroidNetworking;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.learnacad.learnacad.Fragments.Login_Fragment;
 import com.learnacad.learnacad.Fragments.OnBoardingFragment;
 import com.learnacad.learnacad.Models.SessionManager;
 import com.learnacad.learnacad.Models.SharedPrefManager;
+import com.learnacad.learnacad.Notifications.Config;
+import com.learnacad.learnacad.Notifications.NotificationHandler;
 import com.learnacad.learnacad.R;
 
 import java.util.List;
@@ -25,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPrefManager sharedPrefManager;
     FrameLayout frameLayout;
+    private BroadcastReceiver mRegisterationBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,20 @@ public class LoginActivity extends AppCompatActivity {
         AndroidNetworking.initialize(getApplicationContext());
 
         final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.splashRelativeLayout);
+        FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+
+
+        mRegisterationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                if(intent.getAction().equals(Config.REGISTRATION_COMPLETE)){
+
+                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+
+                }
+            }
+        };
 
 
         sharedPrefManager = new SharedPrefManager(getApplicationContext());
@@ -103,6 +125,29 @@ public class LoginActivity extends AppCompatActivity {
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(startMain);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register GCM registration complete receiver
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegisterationBroadcastReceiver,
+                new IntentFilter(Config.REGISTRATION_COMPLETE));
+
+        // register new push message receiver
+        // by doing this, the activity will be notified each time a new message arrives
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegisterationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+
+        // clear the notification area when the app is opened
+        NotificationHandler.clearNotifications(getApplicationContext());
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegisterationBroadcastReceiver);
+        super.onPause();
     }
 
 

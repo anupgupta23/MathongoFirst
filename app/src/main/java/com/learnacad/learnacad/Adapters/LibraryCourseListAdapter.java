@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -29,13 +31,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Sahil Malhotra on 19-06-2017.
  */
 
-public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourseListAdapter.LibraryCourseViewHolder> {
+public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourseListAdapter.LibraryCourseViewHolder> implements
+        Filterable{
 
     Context mContext;
     ArrayList<Minicourse> minicourses;
     SwipeRefreshLayout relativeLayout;
     ArrayList<Tutor> tutors;
-//    EnrollbuttonClicklistener enrollClickListener;
+    ArrayList<Minicourse> minicoursesFiltered;
+
 
     public  LibraryCourseListAdapter(Context context, ArrayList<Minicourse> minicoursesList, SwipeRefreshLayout relativeLayout, ArrayList<Tutor> tutors){
 
@@ -43,7 +47,8 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
         this.tutors = tutors;
         this.minicourses = minicoursesList;
         this.relativeLayout = relativeLayout;
-//        this.enrollClickListener = enrollbuttonClicklistener;
+        this.minicoursesFiltered = minicoursesList;
+
     }
 
     @Override
@@ -56,14 +61,16 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
     public void onBindViewHolder(final LibraryCourseListAdapter.LibraryCourseViewHolder holder, final int position) {
 
 
-        holder.textViewCourseItemTutorName.setText(tutors.get(position).getName());
-        holder.textViewCourseItemDescription.setText(minicourses.get(position).getDescription());
-        holder.textViewCourseItemTitle.setText(minicourses.get(position).getName());
-        holder.ratingBar.setRating(minicourses.get(position).getRating());
+        final Minicourse minicourse = minicoursesFiltered.get(position);
+
+        holder.textViewCourseItemTutorName.setText(minicourse.getTutorName());
+        holder.textViewCourseItemDescription.setText(minicourse.getDescription());
+        holder.textViewCourseItemTitle.setText(minicourse.getName());
+        holder.ratingBar.setRating(minicourse.getRating());
         Drawable drawable = holder.ratingBar.getProgressDrawable();
         drawable.setColorFilter(Color.parseColor("#ffb75d"), PorterDuff.Mode.SRC_ATOP);
 
-        String category = minicourses.get(position).getRelevance();
+        String category = minicourse.getRelevance();
 
         Log.d("care",category);
 
@@ -91,20 +98,34 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
             holder.linearColorView.setBackgroundResource(R.drawable.categoryall);
         }
 
+
         Tutor t = tutors.get(position);
+
         if(t.getImgUrl() == null || t.getImgUrl().length() == 0 || t.getImgUrl().isEmpty()){
 
             holder.circleImageView.setImageResource(R.drawable.teachersicon);
         }else {
 
-            Picasso.with(mContext)
-                    .load(Api_Urls.BASE_URL + "images/" + t.getImgUrl() + ".jpg")
-                    .error(R.drawable.teachersicon)
-                    .into(holder.circleImageView);
+//
+//            Picasso.Builder builder = new Picasso.Builder(mContext);
+//            builder.listener(new Picasso.Listener() {
+//                @Override
+//                public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+//                    Log.d("picassonError",exception.getLocalizedMessage());
+//                    Log.d("picassonError",exception.getMessage());
+//                }
+//            });
 
+            StringBuilder builder1 = new StringBuilder();
+            builder1.append(Api_Urls.BASE_URL);
+            builder1.append("images/")
+                    .append(minicourse.getTutorImageUrl())
+                    .append(".jpg");
+
+            Picasso.with(mContext).load(builder1.toString()).error(R.drawable.teachersicon).into(holder.circleImageView);
         }
 /*
-        if(minicourses.get(position).getEnrolled()){
+        if(minicourse.getEnrolled()){
 
             holder.enrollButton.setBackgroundResource(R.drawable.enrolled_button_library_shape);
             holder.enrollButton.setText("Enrolled");
@@ -117,10 +138,10 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
             public void onClick(View view) {
 
                 Intent intent = new Intent(mContext,LibraryCourseContentActivity.class);
-                String pid = String.valueOf(minicourses.get(position).getCourse_id()) + String.valueOf(tutors.get(position).getTutor_id());
-                intent.putExtra("MINICOURSE_ID",minicourses.get(position).getCourse_id());
+                String pid = String.valueOf(minicourse.getCourse_id()) + String.valueOf(tutors.get(position).getTutor_id());
+                intent.putExtra("MINICOURSE_ID",minicourse.getCourse_id());
                 intent.putExtra("PROCESS_ID",pid);
-                intent.putExtra("ENROLLED",minicourses.get(position).getEnrolled());
+                intent.putExtra("ENROLLED",minicourse.getEnrolled());
                 mContext.startActivity(intent);
 
                 }
@@ -140,7 +161,7 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
             @Override
             public void onClick(View view) {
 
-                if(minicourses.get(position).getEnrolled()){
+                if(minicourse.getEnrolled()){
 
                     Snackbar.make(relativeLayout,"Already Enrolled",Snackbar.LENGTH_SHORT).show();
                 }else{
@@ -148,7 +169,7 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
                     holder.enrollButton.setBackgroundResource(R.drawable.enrolled_button_library_shape);
                     holder.enrollButton.setText("Enrolled");
 
-                    enrollClickListener.EnrollButtonClicked(minicourses.get(position));
+                    enrollClickListener.EnrollButtonClicked(minicourse);
 
                         new SweetAlertDialog(mContext,SweetAlertDialog.SUCCESS_TYPE)
                                 .setContentText("You have successfully enrolled")
@@ -165,8 +186,58 @@ public class LibraryCourseListAdapter extends RecyclerView.Adapter<LibraryCourse
 
     @Override
     public int getItemCount() {
-        Log.d("toing",minicourses.size() + "");
-        return minicourses.size();
+        Log.d("toing",minicoursesFiltered.size() + "");
+        return minicoursesFiltered.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+
+                Log.d("searchCheck",charString);
+                Log.d("searchCheck",charString.toLowerCase());
+                Log.d("searchCheck",charString.toUpperCase());
+
+
+                if(charString.isEmpty()){
+
+                    minicoursesFiltered = minicourses;
+                }else{
+
+                    ArrayList<Minicourse> filteredMinicourses = new ArrayList<>();
+
+                    for(Minicourse minicourse : minicourses){
+
+                        if( (minicourse.getName().contains(charString)) || (minicourse.getTutorName().contains(charString)) || (minicourse.getDescription().contains(charString))
+                                || (minicourse.getName().toLowerCase().contains(charString.toLowerCase()))  || (minicourse.getDescription().toLowerCase().contains(charString.toLowerCase()))
+                                || (minicourse.getTutorName().toLowerCase().contains(charString.toLowerCase()))  || (minicourse.getName().toUpperCase().contains(charString.toUpperCase()))  || (minicourse.getDescription().toUpperCase().contains(charString.toUpperCase()))
+                                || (minicourse.getTutorName().toUpperCase().contains(charString.toUpperCase())) ){
+
+                            Log.d("searchCheck",minicourse.getName());
+
+                            filteredMinicourses.add(minicourse);
+                        }
+                    }
+
+                    minicoursesFiltered = filteredMinicourses;
+
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = minicoursesFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+                minicoursesFiltered = (ArrayList<Minicourse>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
 

@@ -8,4 +8,6 @@
         android:layout_height="match_parent"
         android:id="@+id/lcclecturesFragmentRecyclerView"/>
 
+    <include layout="@layout/progressbar_layout" />
+
 </RelativeLayout>

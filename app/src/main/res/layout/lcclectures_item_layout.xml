@@ -77,8 +77,8 @@
 
         <ImageButton
             android:id="@+id/lcclectures_item_playButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_margin="15dp"
             android:layout_marginStart="20dp"

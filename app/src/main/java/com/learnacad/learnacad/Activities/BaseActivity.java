@@ -16,7 +16,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -67,7 +66,6 @@ public class BaseActivity extends AppCompatActivity
     boolean doubleBackPressToExitPressedOnce = false;
     private FirebaseAnalytics firebaseAnalytics;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,9 +75,6 @@ public class BaseActivity extends AppCompatActivity
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         firebaseAnalytics.setAnalyticsCollectionEnabled(true);
 
-/*        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);*/
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -87,7 +82,6 @@ public class BaseActivity extends AppCompatActivity
       //  Toolbar bottomToolbar = (Toolbar) findViewById(R.id.toolbarBottom);
 
         List<Student> students = SugarRecord.listAll(Student.class);
-
 
 
 
@@ -157,6 +151,10 @@ public class BaseActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+            for(int i = 0; i < navigationView.getMenu().size(); ++i){
+
+                navigationView.getMenu().getItem(i).setChecked(false);
+            }
         } else {
 
             FragmentManager fm = getSupportFragmentManager();
@@ -190,11 +188,9 @@ public class BaseActivity extends AppCompatActivity
 
                 super.onBackPressed();
             }
-
-
         }
 
-        }
+    }
 
 
     public static void getMyCourses(){
@@ -260,28 +256,6 @@ public class BaseActivity extends AppCompatActivity
                 });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -315,12 +289,7 @@ public class BaseActivity extends AppCompatActivity
             }
             break;
 
-/*            case R.id.homeNavigationDrawer:{
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, new Home_Fragment());
-                ft.commit();
-            }
-            break;*/
+
 
             case R.id.mybookmarksNavigationDrawer:{
 
@@ -368,20 +337,27 @@ public class BaseActivity extends AppCompatActivity
                     return true;
                 }
 
-               SweetAlertDialog dialog =  new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
+               final SweetAlertDialog dialog =  new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
                         .setTitleText("Are you sure?")
-                        .setConfirmText("Logout!?")
+                        .setConfirmText("Yes")
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                 LogoutAsyncTask logoutTask = new LogoutAsyncTask();
                                 logoutTask.execute(Api_Urls.BASE_URL);
                             }
-                        });
+                        })
+                       .setCancelText("Cancel");
+
+                dialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                           @Override
+                           public void onClick(SweetAlertDialog sweetAlertDialog) {
+                               dialog.dismissWithAnimation();
+                           }
+                       });
 
                 dialog.setCancelable(true);
                 dialog.show();
-
 
 
             }
@@ -408,9 +384,10 @@ public class BaseActivity extends AppCompatActivity
         }else{
 
             new SweetAlertDialog(this,SweetAlertDialog.ERROR_TYPE)
-                    .setContentText("There occured a problem,Please try again later.")
-                    .setTitleText("Oops..")
+                    .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
+                    .setTitleText("Oops..!!")
                     .show();
+
         }
     }
 
@@ -424,6 +401,7 @@ public class BaseActivity extends AppCompatActivity
 
 
         return (activeNetwork != null && (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI || activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE));
+
 
     }
 

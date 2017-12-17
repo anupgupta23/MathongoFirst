@@ -13,6 +13,11 @@
     <string name="sampledesc">Lorem ipsum dolor sit amet consectetur adipelit aut perferendis dolor numquam enim.</string>
     <string name="sampleTitle">Greatest Integer Function</string>
 
-    <string name="more">…<font fgcolor = "blue">...View More</font></string>
+    <string name="more">…<font fgcolor="blue">...View More</font></string>
     <string name="google_analytics_tracking_id">UA-108063473-1</string>
+
+    <string name="emptyBookmarksString">"You've not bookmarked any lectures yet.\nBookmark them for easy browsing."</string>
+    <string name="emptyCoursesString">"You've not enrolled into any course yet.\nEnroll and start learning."</string>
+    <string name="emptyInternetString">"Please check your internet settings and try again."</string>
+    <string name="emptyFiltersString">"Currently we don't have any courses for your request.\nPlease try clearing the filters."</string>
 </resources>

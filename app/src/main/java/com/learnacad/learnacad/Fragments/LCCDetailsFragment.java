@@ -1,6 +1,6 @@
 package com.learnacad.learnacad.Fragments;
 
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,7 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
@@ -43,7 +44,8 @@ public class LCCDetailsFragment extends Fragment {
     CircleImageView circleImageView;
     private Minicourse minicourse;
     private Tutor t;
-    private ProgressDialog pDialog;
+    private Context mContext;
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,15 +65,19 @@ public class LCCDetailsFragment extends Fragment {
 
         }
 
+        progressBar = view.findViewById(R.id.pb);
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.VISIBLE);
+
+        mContext = getContext();
+
+
         mediumTextView = (TextView) view.findViewById(R.id.lccdetails_courseDetails_languageValueTextView);
         difficultyTextView = (TextView) view.findViewById(R.id.lccdetails_courseDetails_difficultyValueTextView);
         durationTextView = (TextView) view.findViewById(R.id.lccdetails_courseDetails_durationValueTextView);
         relevanceTextView = (TextView) view.findViewById(R.id.lccdetails_courseDetails_relevanceValueTextView);
         classTextView = (TextView) view.findViewById(R.id.lccdetails_courseDetails_classValueTextView);
         circleImageView = (CircleImageView) view.findViewById(R.id.lccdetails_teacherInfo_teachersCircleImageView);
-
-        pDialog = new ProgressDialog(getActivity());
-        pDialog.setCancelable(false);
 
         teachersNameTextView = (TextView) view.findViewById(R.id.lccdetails_teacherInfo_teachersNameTextView);
         teachersDescriptionTextView = (TextView) view.findViewById(R.id.lccdetails_teacherInfo_teachersDescription);
@@ -85,8 +91,7 @@ public class LCCDetailsFragment extends Fragment {
 
         int course_id = getActivity().getIntent().getIntExtra("MINICOURSE_ID", 0);
 
-        pDialog.setMessage("Loading...");
-        showDialog();
+        progressBar.setVisibility(View.VISIBLE);
 
         List<SessionManager> session = listAll(SessionManager.class);
         AndroidNetworking.get(Api_Urls.BASE_URL + "api/minicourses/" + course_id)
@@ -141,14 +146,16 @@ public class LCCDetailsFragment extends Fragment {
                             int teachersId = tutor.getInt("id");
                             t = new Tutor(teachersId, teacherName, teachersdescription);
                             t.setImgUrl(tutor.getString("img"));
+                            progressBar.setVisibility(View.GONE);
 
-                            hideDialog();
                         } catch (JSONException e) {
                             new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
                                     .setContentText("There seems a problem with us.\nPlease try again later.")
                                     .setTitleText("Oops..!!")
                                     .show();
-                            hideDialog();
+
+                           progressBar.setVisibility(View.GONE);
+
                         }
 
                         setData();
@@ -160,6 +167,9 @@ public class LCCDetailsFragment extends Fragment {
                                 .setContentText("There seems a problem with your internet connection.\nPlease try again later.")
                                 .setTitleText("Oops..!!")
                                 .show();
+
+                        progressBar.setVisibility(View.GONE);
+
                     }
                 });
 
@@ -188,31 +198,29 @@ public class LCCDetailsFragment extends Fragment {
         teachersDescriptionTextView.setText(t.getDescription());
 
 
-        if(t.getImgUrl().isEmpty() || t.getImgUrl().length() == 0){
+        if(t.getImgUrl() == null || t.getImgUrl().isEmpty() || t.getImgUrl().length() == 0){
 
             circleImageView.setImageResource(R.drawable.teachersicon);
         }else {
 
-            Picasso.with(getActivity())
-                    .load(Api_Urls.BASE_URL + "images/" + t.getImgUrl() + ".jpg")
-                    .error(R.drawable.teachersicon)
-                    .into(circleImageView);
+
+//            Picasso.Builder builder = new Picasso.Builder(getActivity());
+//            builder.listener(new Listener() {
+//                @Override
+//                public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+//                    Log.d("picassonError",exception.getLocalizedMessage());
+//                    Log.d("picassonError",exception.getMessage());
+//                }
+//            });
+
+            StringBuilder builder1 = new StringBuilder();
+            builder1.append(Api_Urls.BASE_URL);
+            builder1.append("images/")
+                    .append(t.getImgUrl())
+                    .append(".jpg");
+
+            Picasso.with(mContext).load(builder1.toString()).error(R.drawable.teachersicon).into(circleImageView);
         }
     }
 
-    private void showDialog() {
-
-        if (!pDialog.isShowing()) {
-            pDialog.show();
-        }
-
-    }
-
-    private void hideDialog() {
-
-        if (pDialog.isShowing()) {
-            pDialog.dismiss();
-        }
-
-    }
 }

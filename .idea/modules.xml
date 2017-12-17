@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LearnAcad.iml" filepath="$PROJECT_DIR$/LearnAcad.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pdfLibrary/pdfLibrary.iml" filepath="$PROJECT_DIR$/pdfLibrary/pdfLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sweetalertlib/sweetalertlib.iml" filepath="$PROJECT_DIR$/sweetalertlib/sweetalertlib.iml" />
     </modules>
   </component>
 </project>

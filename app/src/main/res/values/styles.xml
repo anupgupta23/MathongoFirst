@@ -7,15 +7,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowFullscreen">true</item>
-        
+
     </style>
-    
+
 
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        
+
     </style>
 
     <style name="customeditText" parent="Widget.Design.TextInputLayout.">
@@ -47,7 +47,7 @@
         <item name="android:textSize">12sp</item>
 
     </style>
-    
+
     <style name="Divider">
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_width">match_parent</item>
@@ -60,7 +60,7 @@
     <item name="android:colorActivatedHighlight">@color/white</item>
     <item name="android:colorControlNormal">@color/white</item>
 </style>
-    
+
     <style name = "Widget.Design.TextInputLayout." parent="Widget.Design.TextInputLayout.">
         <item name="android:colorActivatedHighlight">@color/textColor01</item>
         <item name="colorControlActivated">@color/textColor01</item>

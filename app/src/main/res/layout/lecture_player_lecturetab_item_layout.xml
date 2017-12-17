@@ -57,7 +57,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/rlayout"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/circle">
 
             <com.taishi.library.Indicator
@@ -66,6 +66,7 @@
                 android:layout_height="25dp"
                 android:visibility="visible"
                 app:bar_color="#ff4bca81"
+                android:layout_marginEnd="10dp"
                 app:bar_num="5"
                 app:step_num="25" />
 

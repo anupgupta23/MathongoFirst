@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -75,12 +76,18 @@ public class Library_Fragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-       menu.clear();
+        menu.clear();
         inflater.inflate(R.menu.menu_library,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        Log.d("jkljkl","Inside menu onOptionsItemSelected");
 
         if(item.getItemId() == R.id.notificationsFilters){
 
@@ -88,8 +95,11 @@ public class Library_Fragment extends Fragment {
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.content_frame,new Filters());
             ft.addToBackStack(null).commit();
+            Log.d("jkljkl","Inside first item");
+
 
         }
+
 
         return true;
     }
