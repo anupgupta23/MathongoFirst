@@ -48,7 +48,7 @@ public class LecturePlayerActivity extends AppCompatActivity implements YouTubeP
 
 
 
-    public static final String GOOGLE_DEVELOPER_KEY = "AIzaSyBrJtaqoS-xR6LdGTdlSHJm7pp8pBTGrEE";
+    public static final String GOOGLE_DEVELOPER_KEY = "";
     public static String YOUTUBE_CODE;
     YouTubePlayer player;
     ViewPager viewPager;
